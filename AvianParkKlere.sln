@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AvianParkKlere", "AvianPark
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AvainParkKlere.Api", "AvainParkKlere.Api\AvainParkKlere.Api.csproj", "{C4D9B965-3544-498E-937A-7317C8BA5745}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvianParkKlere.Contracts", "AvianParkKlere.Contracts\AvianParkKlere.Contracts.csproj", "{1DC4F9F4-8BC5-44D4-8191-DF2BA4135085}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C4D9B965-3544-498E-937A-7317C8BA5745}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4D9B965-3544-498E-937A-7317C8BA5745}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4D9B965-3544-498E-937A-7317C8BA5745}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1DC4F9F4-8BC5-44D4-8191-DF2BA4135085}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DC4F9F4-8BC5-44D4-8191-DF2BA4135085}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DC4F9F4-8BC5-44D4-8191-DF2BA4135085}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DC4F9F4-8BC5-44D4-8191-DF2BA4135085}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

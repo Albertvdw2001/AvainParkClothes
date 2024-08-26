@@ -1,5 +1,7 @@
 
 using AvainParkKlere.Api.EntityFrameworkCore;
+using AvainParkKlere.Api.Repositories;
+using AvainParkKlere.Api.RepositoryInterfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace AvainParkKlere.Api
@@ -23,6 +25,13 @@ namespace AvainParkKlere.Api
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            
+            // register data repositories
+            builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            builder.Services.AddScoped<IStudentRepository, StudentRepository>();
+            builder.Services.AddScoped<IStudentClothingRepository, StudentClothingRepository>();
+            builder.Services.AddScoped<IClothingRepository, ClothingRepository>();
+
 
             var app = builder.Build();
 
