@@ -1,5 +1,4 @@
-﻿using Microsoft.Identity.Client;
-
+﻿
 namespace AvainParkKlere.Api.EntityFrameworkCore.Entities
 {
     public class Clothing

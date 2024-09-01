@@ -1,5 +1,8 @@
 using AvianParkKlere.Components;
 using MudBlazor.Services;
+using AutoMapper;
+
+using AvianParkKlere.Contracts.AutoMapper;
 
 namespace AvianParkKlere
 {
@@ -15,6 +18,10 @@ namespace AvianParkKlere
             // Add services to the container.
             builder.Services.AddRazorComponents()
                 .AddInteractiveServerComponents();
+
+
+            // Added Services
+            builder.Services.AddAutoMapper(typeof(MapperConfig)); // AutoMapper Configuration
 
             var app = builder.Build();
 

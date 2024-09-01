@@ -4,10 +4,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AvianParkKlere", "AvianParkKlere\AvianParkKlere.csproj", "{71D26358-1660-4540-9E47-A3718E5506D7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1DC4F9F4-8BC5-44D4-8191-DF2BA4135085} = {1DC4F9F4-8BC5-44D4-8191-DF2BA4135085}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AvainParkKlere.Api", "AvainParkKlere.Api\AvainParkKlere.Api.csproj", "{C4D9B965-3544-498E-937A-7317C8BA5745}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1DC4F9F4-8BC5-44D4-8191-DF2BA4135085} = {1DC4F9F4-8BC5-44D4-8191-DF2BA4135085}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvianParkKlere.Contracts", "AvianParkKlere.Contracts\AvianParkKlere.Contracts.csproj", "{1DC4F9F4-8BC5-44D4-8191-DF2BA4135085}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AvianParkKlere.Contracts", "AvianParkKlere.Contracts\AvianParkKlere.Contracts.csproj", "{1DC4F9F4-8BC5-44D4-8191-DF2BA4135085}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

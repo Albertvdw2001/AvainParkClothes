@@ -4,5 +4,5 @@
     {
         public int StudentId { get; set; }
         public int ClothingId { get; set; }
-    }
+    } 
 }
