@@ -19,6 +19,10 @@ namespace AvianParkKlere
             builder.Services.AddRazorComponents()
                 .AddInteractiveServerComponents();
 
+            builder.Services.AddHttpClient("Default", client =>
+            {
+                client.BaseAddress = new Uri("https://localhost:7067/");
+            });
 
             // Added Services
             builder.Services.AddAutoMapper(typeof(MapperConfig)); // AutoMapper Configuration
