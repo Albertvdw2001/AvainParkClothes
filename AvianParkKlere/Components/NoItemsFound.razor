@@ -1,0 +1,22 @@
+﻿@using ScanAndGo.AdminPortal.ServiceInterfaces
+@using ScanAndGo.AdminPortal.Services
+
+@inject ILocalizationService ls
+
+
+<div>
+    @ls.GetText("(LOC)No" + ItemsName + "Found.")
+</div>
+
+@code {
+    [Parameter]
+    public string ItemsName { get; set; }
+}
+
+<style>
+    div {
+        font-size: 1.5rem;
+        color: #666;
+        text-align: center;
+    }
+</style>

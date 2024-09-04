@@ -1,0 +1,124 @@
+﻿@using AutoMapper
+@using MudBlazor
+
+@typeparam TGet
+@typeparam TCreate
+@typeparam TUpdate
+
+@inject IMapper _mapper;
+
+<div style="display: flex; align-items: center; margin-bottom: 25px;">
+    
+    @if (EnableCrudOptions)
+    {
+        <MudButton Variant="Variant.Filled"
+            DropShadow="true"
+            StartIcon="@Icons.Material.Filled.Add"
+            OnClick="() => OpenCreateDialogAsync()"
+            Color="Color.Primary">New</MudButton>
+
+        <MudMenu Color="Color.Secondary"
+            Style="margin-left: 25px;"
+            EndIcon="@Icons.Material.Filled.KeyboardArrowDown"
+            Label="Delete"
+            Variant="Variant.Filled"
+            AnchorOrigin="Origin.BottomCenter"
+            TransformOrigin="Origin.TopCenter" Dense="true">
+
+            <MudMenuItem OnClick="DeleteAllItemsAsync">
+                <MudText Style="font-size: 14px;">
+                    DeleteAll
+                </MudText>
+            </MudMenuItem>
+
+            @if (SelectedItems.Count > 0)
+            {
+                <MudMenuItem OnClick="DeleteSelectedItemsAsync">
+                    <MudText Style="font-size: 14px;">
+                        DeleteSelected
+                    </MudText>
+                </MudMenuItem>
+            }
+        </MudMenu>
+    }
+
+    <div style="display: flex; align-items: center; margin-left: auto;">
+        <MudTextField T="string"
+            Immediate="true"
+            Style="margin-left: 5px; width: 300px; background-color: white; border-radius: 5px;"
+            Margin="MudBlazor.Margin.Dense"
+            Variant="Variant.Outlined"
+            Adornment="Adornment.Start"
+            AdornmentIcon="@Icons.Material.Filled.Search"
+            Clearable="true"
+            Placeholder="Search" />
+
+        <MudMenu Icon="@Icons.Material.Filled.KeyboardArrowDown"
+            Color="MudBlazor.Color.Primary"
+            Variant="Variant.Outlined"
+            Style="height: 40px; background-color: white; margin-top: 2px; border-radius: 5px;"
+            AnchorOrigin="Origin.BottomCenter"
+            TransformOrigin="Origin.TopCenter" Dense="true">
+        </MudMenu>
+    </div>
+</div>
+
+@if (NoItemsFound)
+{
+    <NoItemsFound ItemsName="@ItemsName" />
+}
+else
+{
+    <MudTable @ref="Table" 
+    T="TGet" 
+    Items="@Items" 
+    MultiSelection="true" 
+    FixedHeader="true" 
+    Striped="true"
+    SelectedItems="SelectedItems"
+    SelectedItemsChanged="OnSelectedItemsChanged"
+    Height="calc(100vh - 240px)">
+    <HeaderContent>
+        @if (HeaderTitles is not null)
+        {
+            @foreach (string headerTitle in HeaderTitles)
+            {
+                <MudTh>@headerTitle</MudTh>
+            }
+            @if (EnableCrudOptions)
+            {
+                <MudTh></MudTh>
+                <MudTh></MudTh>
+            }
+        }
+    </HeaderContent>
+
+    <RowTemplate>
+
+        @if (RowTemplate is not null)
+        {
+
+            @RowTemplate(context)
+
+        }
+        
+        @if (EnableCrudOptions)
+        {
+            <MudTd DataLabel="Empty">
+            </MudTd>
+            <MudTd DataLabel="Edit">
+                <MudIconButton Icon="@Icons.Material.Outlined.Edit" Size="Size.Medium" Color="Color.Warning" OnClick="() => OpenUpdateDialogAsync(context)"></MudIconButton>
+            </MudTd>
+            <MudTd DataLabel="Delete">
+                <MudIconButton Icon="@Icons.Material.Outlined.Delete" Size="Size.Medium" Color="Color.Error" OnClick="() => OpenDeleteDialogAsync(context)"></MudIconButton> @* OnClick="DeleteItemAsync(context)" *@
+            </MudTd>
+        }
+    </RowTemplate>
+
+    <PagerContent>
+        <MudTablePager PageSizeOptions="new int[]{10, 25, 50, 100}" />
+    </PagerContent>
+
+    </MudTable>
+}
+
