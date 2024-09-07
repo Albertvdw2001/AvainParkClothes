@@ -1,2 +1,16 @@
 ﻿@page "/students"
+@using AvianParkKlere.Contracts.Dtos.Student
 
+@* Data Grid *@
+
+<GenericDataGrid @ref="Table"
+                Items="StudentList"
+                HeaderTitles="@(["Id", "Name", "Surname", "Age", "Grade"])"
+                TGet="StudentGetDto"
+                TCreate="StudentPostDto"
+                TUpdate="StudentPutDto"
+                EnableCrudOptions="true" />
+
+@* Dialogs *@
+
+@* CREATE *@

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
 
 namespace AvianParkKlere.Components;
 
@@ -9,7 +10,12 @@ public partial class GenericDataGrid<TGet, TCreate, TUpdate>
     where TCreate : class, new()
     where TUpdate : class, new()
 {
+    [CascadingParameter]
+    protected MudTheme MyCustomTheme { get; set; }
+
     [Parameter] public bool EnableCrudOptions { get; set; }
+    [Parameter] public bool RemoveSearchBar { get; set; } = false;
+    [Parameter] public List<string> SearchFields { get; set; } = new();
     [Parameter] public EventCallback OnCreateNewItem { get; set; }
     [Parameter] public EventCallback<TGet> OnUpdateItem { get; set; }
     [Parameter] public EventCallback<TGet> OnDeleteItem { get; set; }
@@ -25,9 +31,52 @@ public partial class GenericDataGrid<TGet, TCreate, TUpdate>
     [Parameter] public string ItemsName { get; set; } = "Items";
     [Parameter] public EventCallback<IEnumerable<TGet>> SelectedItemsChanged { get; set; }
     [Parameter] public RenderFragment<TGet>? RowTemplate { get; set; }
+    [Parameter] public EventCallback<string> OnSearchQueryChanged { get; set; }
+    [Parameter] public EventCallback<string> OnSearchFieldChange { get; set; }
+    [Parameter] public string SearchField { get; set; }
 
     public HashSet<TGet> SelectedItems = new();
     public MudTable<TGet> Table { get; set; }
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        SearchField = SearchFields.Count > 1 ? SearchFields[0] : "";
+        if (OnSearchFieldChange.HasDelegate)
+        {
+            await OnSearchFieldChange.InvokeAsync(SearchField);
+        }
+    }
+
+
+    private void OnSearch(string searchQuery)
+    {
+
+        if (OnSearchQueryChanged.HasDelegate)
+        {
+            OnSearchQueryChanged.InvokeAsync(searchQuery);
+        }
+
+        /*
+        foreach (var field in SearchFields)
+        {
+            if (Regex.Replace(field, @"\s+", "").ToLower() == SearchField.ToLower())
+            {
+                Items = Items.Where(x => x.GetType().GetProperty(field)?.GetValue(x)?.ToString().Contains(searchQuery, StringComparison.OrdinalIgnoreCase) == true);
+            } 
+            StateHasChanged();
+        }*/
+    }
+
+
+    private void OnSearchFieldSelect(string field)
+    {
+        if (OnSearchFieldChange.HasDelegate)
+        {
+            OnSearchFieldChange.InvokeAsync(field);
+        }
+    }
 
 
     private async Task OnSelectedItemsChanged()

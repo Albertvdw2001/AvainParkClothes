@@ -1,4 +1,4 @@
-﻿@using AutoMapper
+﻿﻿@using AutoMapper
 @using MudBlazor
 
 @typeparam TGet
@@ -7,17 +7,24 @@
 
 @inject IMapper _mapper;
 
+<MudThemeProvider Theme="MyCustomTheme" />
+
 <div style="display: flex; align-items: center; margin-bottom: 25px;">
     
     @if (EnableCrudOptions)
     {
-        <MudButton Variant="Variant.Filled"
+        @if (OnCreateNewItem.HasDelegate)
+        {
+            <MudButton Variant="Variant.Filled"
             DropShadow="true"
             StartIcon="@Icons.Material.Filled.Add"
             OnClick="() => OpenCreateDialogAsync()"
             Color="Color.Primary">New</MudButton>
-
-        <MudMenu Color="Color.Secondary"
+        }
+  
+        @if (OnDeleteItems.HasDelegate)
+        {
+            <MudMenu Color="Color.Secondary"
             Style="margin-left: 25px;"
             EndIcon="@Icons.Material.Filled.KeyboardArrowDown"
             Label="Delete"
@@ -27,22 +34,39 @@
 
             <MudMenuItem OnClick="DeleteAllItemsAsync">
                 <MudText Style="font-size: 14px;">
-                    DeleteAll
+                    Delete All
                 </MudText>
             </MudMenuItem>
 
-            @if (SelectedItems.Count > 0)
+            @if (SelectedItems.Count > 0 && OnDeleteSelectedItems.HasDelegate)
             {
                 <MudMenuItem OnClick="DeleteSelectedItemsAsync">
                     <MudText Style="font-size: 14px;">
-                        DeleteSelected
+                        "Delete Selected"
+                    </MudText>
+                </MudMenuItem>
+            }
+            </MudMenu>
+        }
+        
+
+    <div style="display: flex; align-items: center; margin-left: auto">
+        <MudMenu Icon="@Icons.Material.Filled.KeyboardArrowDown"
+                 Color="MudBlazor.Color.Primary"
+                 Variant="Variant.Outlined"
+                 Style="height: 40px; background-color: white; margin-top: 2px; border-radius: 5px;"
+                 AnchorOrigin="Origin.BottomCenter"
+                 TransformOrigin="Origin.TopCenter" Dense="true">
+            @foreach (var field in SearchFields)
+            {
+                <MudMenuItem OnClick="() => OnSearchFieldSelect(field)">
+                    <MudText Style="font-size: 14px;">
+                        @field
                     </MudText>
                 </MudMenuItem>
             }
         </MudMenu>
-    }
 
-    <div style="display: flex; align-items: center; margin-left: auto;">
         <MudTextField T="string"
             Immediate="true"
             Style="margin-left: 5px; width: 300px; background-color: white; border-radius: 5px;"
@@ -50,17 +74,11 @@
             Variant="Variant.Outlined"
             Adornment="Adornment.Start"
             AdornmentIcon="@Icons.Material.Filled.Search"
+            TextChanged="OnSearch"
             Clearable="true"
-            Placeholder="Search" />
-
-        <MudMenu Icon="@Icons.Material.Filled.KeyboardArrowDown"
-            Color="MudBlazor.Color.Primary"
-            Variant="Variant.Outlined"
-            Style="height: 40px; background-color: white; margin-top: 2px; border-radius: 5px;"
-            AnchorOrigin="Origin.BottomCenter"
-            TransformOrigin="Origin.TopCenter" Dense="true">
-        </MudMenu>
+            Placeholder="@SearchField" />
     </div>
+    }
 </div>
 
 @if (NoItemsFound)
@@ -77,8 +95,8 @@ else
     Striped="true"
     SelectedItems="SelectedItems"
     SelectedItemsChanged="OnSelectedItemsChanged"
-    Height="calc(100vh - 240px)">
-    <HeaderContent>
+    Height="calc(100vh - 240px)" >
+    <HeaderContent>     
         @if (HeaderTitles is not null)
         {
             @foreach (string headerTitle in HeaderTitles)
@@ -121,4 +139,3 @@ else
 
     </MudTable>
 }
-

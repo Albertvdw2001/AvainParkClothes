@@ -22,8 +22,8 @@ namespace AvianParkKlere.Components.Dialogs
             await Dialog.ShowAsync();
         }
 
-
         private async Task OnDelete()
+
         {
             await DeleteMethod.InvokeAsync();
             await Close();
