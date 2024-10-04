@@ -1,8 +1,8 @@
 using AvianParkKlere.Components;
 using MudBlazor.Services;
 using AutoMapper;
-
 using AvianParkKlere.Contracts.AutoMapper;
+using AvianParkKlere.Services;
 
 namespace AvianParkKlere
 {
@@ -23,6 +23,8 @@ namespace AvianParkKlere
             {
                 client.BaseAddress = new Uri("https://localhost:7067/");
             });
+
+            builder.Services.AddScoped<ApiService>(); // ApiService
 
             // Added Services
             builder.Services.AddAutoMapper(typeof(MapperConfig)); // AutoMapper Configuration

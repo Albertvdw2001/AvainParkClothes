@@ -1,5 +1,22 @@
-﻿@page "/students"
+﻿@using AvianParkKlere.Components.Dialogs
 @using AvianParkKlere.Contracts.Dtos.Student
+@using AvianParkKlere.Services
+@using MudBlazor
+
+@inject ApiService apiService
+@inject ISnackbar snackbar
+
+@rendermode InteractiveServer
+
+<MudThemeProvider />
+<MudPopoverProvider />
+<MudDialogProvider />
+<MudSnackbarProvider Style="
+            position: fixed;
+            top: 100px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            -webkit-transform: translate(-50%, -50%);" />
 
 @* Data Grid *@
 
@@ -9,8 +26,18 @@
                 TGet="StudentGetDto"
                 TCreate="StudentPostDto"
                 TUpdate="StudentPutDto"
-                EnableCrudOptions="true" />
+                OnCreateNewItem="OpenCreateDialog"
+                EnableCrudOptions="true" >
+    <RowTemplate>
+        <MudTd DataLabel="Id">@context.Id</MudTd>
+        <MudTd DataLabel="Name">@context.Name</MudTd>
+        <MudTd DataLabel="Description">@context.Surname</MudTd>
+        <MudTd DataLabel="Price">@context.Age</MudTd>
+        <MudTd DataLabel="PLU">@context.Grade</MudTd>
+    </RowTemplate>
+         </GenericDataGrid>
 
-@* Dialogs *@
-
+@* Dialogs *@    
 @* CREATE *@
+ <CreateUpdateDialog @ref="CreateDialog"
+    SubmitMethod="HandleCreateStudent" /> 

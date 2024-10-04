@@ -1,0 +1,16 @@
+﻿@using AvianParkKlere.Contracts.Dtos.Clothing
+@using AvianParkKlere.ServerUser.Components.Shared
+
+@* Data Grid *@
+
+<GenericDataGrid @ref="Table"
+                 Items="ClothingList"
+                 HeaderTitles="@(["Id", "Name", "Surname", "Age", "Grade"])"
+                 TGet="ClothingGetDto"
+                 TCreate="ClothingPostDto"
+                 TUpdate="ClothingPutDto"
+                 EnableCrudOptions="true" />
+
+@* Dialogs *@
+
+@* CREATE *@

@@ -2,6 +2,7 @@
 using AvianParkKlere.Contracts.Dtos.Student;
 using AvianParkKlere.Contracts.Dtos.StudentClothing;
 using Newtonsoft.Json;
+using System.Net.Http;
 
 namespace AvianParkKlere.Services
 {
@@ -9,26 +10,31 @@ namespace AvianParkKlere.Services
     {
         private readonly HttpClient httpClient;
 
-        public ApiService(HttpClient httpClient)
+        public ApiService(IHttpClientFactory httpClientFactory)
         {
-            this.httpClient = httpClient;
+            httpClient = httpClientFactory.CreateClient("Default");
         }
 
         /* Students */
-        
-        public async Task<List<StudentGetDto>?> GetStudentsAsync()
-        {
-            var response = await httpClient.GetAsync("Student");
-            var content = await response.Content.ReadAsStringAsync();
-            var result = JsonConvert.DeserializeObject<List<StudentGetDto>>(content);
 
-            return result;
+        public async Task<List<StudentGetDto>?> GetStudents()
+        {
+            var response = await httpClient.GetFromJsonAsync<List<StudentGetDto>>("Student");
+
+            return response;
+        }
+
+        public async Task<bool> CreateStudent(StudentPostDto student)
+        {
+            var response = await httpClient.PostAsJsonAsync("Student", student);
+
+            return response.IsSuccessStatusCode;
         }
 
 
         /* Clothing */
         
-        public async Task<List<ClothingGetDto>?> GetClothingAsync()
+        public async Task<List<ClothingGetDto>?> GetClothing()
         {
             var response = await httpClient.GetAsync("Clothing");
             var content = await response.Content.ReadAsStringAsync();

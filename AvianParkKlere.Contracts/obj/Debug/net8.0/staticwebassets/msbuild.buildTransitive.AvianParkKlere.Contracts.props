@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\AvianParkKlere.Contracts.props" />
+</Project>

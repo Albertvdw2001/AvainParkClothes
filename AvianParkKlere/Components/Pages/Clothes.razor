@@ -1,5 +1,15 @@
-﻿<h3>Clothes</h3>
+﻿@using AvianParkKlere.Contracts.Dtos.Clothing
 
-@code {
+@* Data Grid *@
 
-}
+<GenericDataGrid @ref="Table"
+                 Items="ClothingList"
+                 HeaderTitles="@(["Id", "Name", "Surname", "Age", "Grade"])"
+                 TGet="ClothingGetDto"
+                 TCreate="ClothingPostDto"
+                 TUpdate="ClothingPutDto"
+                 EnableCrudOptions="true" />
+
+@* Dialogs *@
+
+@* CREATE *@

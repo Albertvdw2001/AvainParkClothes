@@ -1,0 +1,114 @@
+is_global = true
+build_property.MudDebugAnalyzer = 
+build_property.MudAllowedAttributePattern = 
+build_property.MudIllegalParameters = 
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = AvianParkKlere
+build_property.RootNamespace = AvianParkKlere
+build_property.ProjectDir = C:\Users\alber\Desktop\.Net projects\AvianParkKlere\AvainParkClothes\AvianParkKlere\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\alber\Desktop\.Net projects\AvianParkKlere\AvainParkClothes\AvianParkKlere
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/alber/Desktop/.Net projects/AvianParkKlere/AvainParkClothes/AvianParkKlere/AvianParkKlere.ServerUser/Components/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXZpYW5QYXJrS2xlcmUuU2VydmVyVXNlclxDb21wb25lbnRzXEFwcC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alber/Desktop/.Net projects/AvianParkKlere/AvainParkClothes/AvianParkKlere/AvianParkKlere.ServerUser/Components/Layout/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = QXZpYW5QYXJrS2xlcmUuU2VydmVyVXNlclxDb21wb25lbnRzXExheW91dFxNYWluTGF5b3V0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alber/Desktop/.Net projects/AvianParkKlere/AvainParkClothes/AvianParkKlere/AvianParkKlere.ServerUser/Components/Layout/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = QXZpYW5QYXJrS2xlcmUuU2VydmVyVXNlclxDb21wb25lbnRzXExheW91dFxOYXZNZW51LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alber/Desktop/.Net projects/AvianParkKlere/AvainParkClothes/AvianParkKlere/AvianParkKlere.ServerUser/Components/Pages/Counter.razor]
+build_metadata.AdditionalFiles.TargetPath = QXZpYW5QYXJrS2xlcmUuU2VydmVyVXNlclxDb21wb25lbnRzXFBhZ2VzXENvdW50ZXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alber/Desktop/.Net projects/AvianParkKlere/AvainParkClothes/AvianParkKlere/AvianParkKlere.ServerUser/Components/Pages/Error.razor]
+build_metadata.AdditionalFiles.TargetPath = QXZpYW5QYXJrS2xlcmUuU2VydmVyVXNlclxDb21wb25lbnRzXFBhZ2VzXEVycm9yLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alber/Desktop/.Net projects/AvianParkKlere/AvainParkClothes/AvianParkKlere/AvianParkKlere.ServerUser/Components/Pages/Home.razor]
+build_metadata.AdditionalFiles.TargetPath = QXZpYW5QYXJrS2xlcmUuU2VydmVyVXNlclxDb21wb25lbnRzXFBhZ2VzXEhvbWUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alber/Desktop/.Net projects/AvianParkKlere/AvainParkClothes/AvianParkKlere/AvianParkKlere.ServerUser/Components/Pages/Weather.razor]
+build_metadata.AdditionalFiles.TargetPath = QXZpYW5QYXJrS2xlcmUuU2VydmVyVXNlclxDb21wb25lbnRzXFBhZ2VzXFdlYXRoZXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alber/Desktop/.Net projects/AvianParkKlere/AvainParkClothes/AvianParkKlere/AvianParkKlere.ServerUser/Components/Routes.razor]
+build_metadata.AdditionalFiles.TargetPath = QXZpYW5QYXJrS2xlcmUuU2VydmVyVXNlclxDb21wb25lbnRzXFJvdXRlcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alber/Desktop/.Net projects/AvianParkKlere/AvainParkClothes/AvianParkKlere/AvianParkKlere.ServerUser/Components/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = QXZpYW5QYXJrS2xlcmUuU2VydmVyVXNlclxDb21wb25lbnRzXF9JbXBvcnRzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alber/Desktop/.Net projects/AvianParkKlere/AvainParkClothes/AvianParkKlere/Components/App.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBcHAucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alber/Desktop/.Net projects/AvianParkKlere/AvainParkClothes/AvianParkKlere/Components/Dashboard.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xEYXNoYm9hcmQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alber/Desktop/.Net projects/AvianParkKlere/AvainParkClothes/AvianParkKlere/Components/Dialogs/CreateUpdateDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xEaWFsb2dzXENyZWF0ZVVwZGF0ZURpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alber/Desktop/.Net projects/AvianParkKlere/AvainParkClothes/AvianParkKlere/Components/Dialogs/DeleteDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xEaWFsb2dzXERlbGV0ZURpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alber/Desktop/.Net projects/AvianParkKlere/AvainParkClothes/AvianParkKlere/Components/Dialogs/ReadDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xEaWFsb2dzXFJlYWREaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alber/Desktop/.Net projects/AvianParkKlere/AvainParkClothes/AvianParkKlere/Components/GenericDataGrid.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xHZW5lcmljRGF0YUdyaWQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alber/Desktop/.Net projects/AvianParkKlere/AvainParkClothes/AvianParkKlere/Components/NoItemsFound.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xOb0l0ZW1zRm91bmQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alber/Desktop/.Net projects/AvianParkKlere/AvainParkClothes/AvianParkKlere/Components/Pages/Clothes.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDbG90aGVzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alber/Desktop/.Net projects/AvianParkKlere/AvainParkClothes/AvianParkKlere/Components/Pages/Students.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTdHVkZW50cy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alber/Desktop/.Net projects/AvianParkKlere/AvainParkClothes/AvianParkKlere/Components/Routes.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xSb3V0ZXMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alber/Desktop/.Net projects/AvianParkKlere/AvainParkClothes/AvianParkKlere/Components/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xfSW1wb3J0cy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alber/Desktop/.Net projects/AvianParkKlere/AvainParkClothes/AvianParkKlere/Components/Layout/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTWFpbkxheW91dC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-4hvflwho87
+
+[C:/Users/alber/Desktop/.Net projects/AvianParkKlere/AvainParkClothes/AvianParkKlere/Components/Layout/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTmF2TWVudS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-vnervyn3kj
+
+[C:/Users/alber/Desktop/.Net projects/AvianParkKlere/AvainParkClothes/AvianParkKlere/Components/Pages/_Host.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xfSG9zdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 

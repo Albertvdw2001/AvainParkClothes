@@ -31,7 +31,6 @@ namespace AvianParkKlere.Components.Dialogs
             {
                 await SubmitMethod.InvokeAsync();
             }
-            await Close();
         }
 
 
