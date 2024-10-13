@@ -1,0 +1,17 @@
+﻿@using AvianParkKlere.ServerUser.Components.CrudDialogs.Generic
+@using MudBlazor
+
+<CreateUpdateDialog 
+    OnSubmit="Submit" SubmitButtonEnabled="@Validated">
+    <FormTemplate>
+        <MudForm FieldChanged="ValidateForm">
+            <MudTextField @bind-Value="Student.Name" Label="Name" Required="true" />
+
+            <MudTextField @bind-Value="Student.Surname" Label="Surname" Required="true" />
+
+            <MudNumericField @bind-Value="Student.Age" Label="Age" Required="true" />   
+
+            <MudNumericField @bind-Value="Student.Grade" Label="Grade" Required="true" />   
+        </MudForm>
+    </FormTemplate>
+</CreateUpdateDialog> 

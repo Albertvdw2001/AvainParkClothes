@@ -1,0 +1,152 @@
+﻿@* @using ScanAndGo.AdminPortal.Localization.Models
+@using ScanAndGo.AdminPortal.ServiceInterfaces
+@using ScanAndGo.AdminPortal.ServiceInterfaces.Api
+@using ScanAndGo.Contracts.Constants
+@using ScanAndGo.Contracts.Models.Dtos.Branch
+@using ScanAndGo.Contracts.Models.Dtos.Tenant
+
+@inject ITenantApiService _tenantApiService
+@inject ISnackbar snackbar
+@inject ILocalizationService ls
+@inject AuthenticationStateProvider _authStateProvider
+
+<MudDialog Style="width: 800px;">
+    <DialogContent>
+
+        <div style="margin-top: 10px;">
+
+            @if (EmptyQRCode)
+            {
+                <MudAlert Severity="Severity.Error">@ls.GetText("PleaseProvideAQRCode")</MudAlert>
+            }
+            else if (EmptyName)
+            {
+                <MudAlert Severity="Severity.Error">@ls.GetText("PleaseProvideAName")</MudAlert>
+            }
+            else if (EmptyEmail)
+            {
+                <MudAlert Severity="Severity.Error">@ls.GetText("PleaseProvideAnEmail")</MudAlert>
+            }
+            else if (TenantUnselected)
+            {
+                <MudAlert Severity="Severity.Error">@ls.GetText("PleaseProvideATenant")</MudAlert>
+            }
+            else if (EmptyPhone)
+            {
+                <MudAlert Severity="Severity.Error">@ls.GetText("PleaseProvideAPhone")</MudAlert>
+            }
+            else if (EmptyAddress)
+            {
+                <MudAlert Severity="Severity.Error">@ls.GetText("PleaseProvideUsersFirstName")</MudAlert>
+            }
+            else if (GenericError)
+            {
+                <MudAlert Severity="Severity.Error">@ls.GetText("GenericError")</MudAlert>
+            }
+        </div>
+
+        <MudForm Spacing="1" Style="margin-left: 25px; margin-right: 25px; margin-top: 10px;">
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                @if (BranchDto.QRCode is not null && BranchDto.QRCode.Length > 0)
+                {
+                    <MudBadge Color="MudBlazor.Color.Error"
+                              Icon="@Icons.Material.Filled.Close"
+                              Overlap="true"
+                              Bordered="true"
+                              OnClick="RemoveQRCode">
+
+                        <MudAvatar Style="width: 100px; height: 100px;" Square="true">
+                            <img src="@($"data:image/png;base64,{Convert.ToBase64String(BranchDto.QRCode)}")" class="avatar-img" />
+                        </MudAvatar>
+                    </MudBadge>
+                }
+                else
+                {
+                    <MudAvatar Color="Color.Primary" Variant="Variant.Outlined" Style="width: 100px; height: 100px;" Square="true">
+                        <MudIcon Icon="@Icons.Material.Filled.QrCode2" Style="width: 100px; height: 100px;" />
+                    </MudAvatar>
+                }
+
+                <MudFileUpload T="IBrowserFile" FilesChanged="UploadFile" Accept=".png, .jpg, .jpeg" MaximumFileCount="1">
+                    <ActivatorContent>
+                        <MudButton Variant="Variant.Text" Color="Color.Success">Edit</MudButton>
+                    </ActivatorContent>
+                </MudFileUpload>
+            </div>
+
+            <div class="flex-container">
+                <MudTextField T="string" Immediate="true" Label="Name" @bind-Value="BranchDto.Name" />
+                @if (Tenants is not null && IsTenantSelectable)
+                {
+                    <MudSelect T="GetTenantDto" @bind-Value="SelectedTenant" ToStringFunc="@((GetTenantDto ? tenant) => tenant?.Name)" Label="Tenant">
+                        @foreach (var tenant in Tenants)
+                        {
+                            <MudSelectItem Value="tenant">@tenant.Name</MudSelectItem>
+                        }
+                    </MudSelect>
+                }
+            </div>
+            <div class="flex-container">
+                @if (Cultures is not null)
+                {
+                    <MudSelect T="Culture" @bind-Value="SelectedCulture" ToStringFunc="@((Culture ? culture) => culture?.Name)" Label="Default Language" Clearable="true">
+                        @foreach (var culture in Cultures)
+                        {
+                            <MudSelectItem Value="culture">
+                                <span style="display: flex; align-items: center;">
+                                    @((MarkupString)culture.Icon)
+                                    <MudText Style="margin-left: 15px;">
+                                        @culture.Name
+                                    </MudText>
+                                </span>
+                            </MudSelectItem>
+                        }
+                    </MudSelect>
+                }
+                @if (Currencies is not null)
+                {
+                    <MudSelect T="Currency" @bind-Value="SelectedCurrency" ToStringFunc="@((Currency ? currency) => currency?.Name)" Label="Currency" Clearable="true">
+                        @foreach (var currency in Currencies)
+                        {
+                            <MudSelectItem Value="currency">
+                                <span style="display: flex; align-items: center;">
+                                    @((MarkupString)currency.Icon)
+                                    <MudText Style="margin-left: 15px;">
+                                        @currency.Name (@currency.Symbol)
+                                    </MudText>
+                                </span>
+                            </MudSelectItem>
+                        }
+                    </MudSelect>
+                }
+            </div>
+            <div class="flex-container">
+                <MudTextField T="string" Immediate="true" Label="Phone" @bind-Value="BranchDto.Phone" />
+                <MudTextField T="string" Immediate="true" Label="Email Address" @bind-Value="BranchDto.Email" />
+            </div>
+            <MudTextField T="string" Immediate="true" Label="Address" @bind-Value="BranchDto.Address" />
+
+        </MudForm>
+    </DialogContent>
+    <DialogActions>
+        <MudButton Color="Color.Primary" OnClick="Submit" Style="margin-top: 10px;">Save Changes</MudButton>
+    </DialogActions>
+</MudDialog>
+
+<style>
+    .flex-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px; /* Adjust the gap between fields as needed */
+    }
+
+    .flex-container > * {
+        flex: 1 1 150px; /* Adjust the minimum width as needed */
+    }
+
+    .avatar-img {
+        width: 100%; /* Ensure the image fills the avatar container */
+        height: 100%; /* Ensure the image fills the avatar container */
+        object-fit: cover; /* Maintain aspect ratio and cover the entire avatar */
+    }
+</style> *@

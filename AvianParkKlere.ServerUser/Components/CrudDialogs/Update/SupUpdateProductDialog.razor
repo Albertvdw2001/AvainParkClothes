@@ -1,0 +1,136 @@
+﻿@* 
+@using AutoMapper
+@using AvianParkKlere.ServerUser.Components.CrudDialogs.Generic
+
+@inject ISnackbar Snackbar
+@inject IMapper mapper
+@inject IDialogService _dialogService
+
+<CreateUpdateDialog SubmitButtonEnabled="@ProductChanged"
+                    OnSubmit="@Update"
+                    SubmitText="Save Changes"
+                    AddSecondTab="true"
+                    TabOneText="Details"
+                    TabTwoText="Branch Allocation">
+
+    <FormTemplate>
+        <div class="dialog-edit">
+            <MudTextField T="string" Label="Name" Placeholder="Enter name" Immediate="true"
+                          Text="@Product.Name" TextChanged="OnProductNameChanged"></MudTextField>
+            <MudIconButton Icon="@Icons.Material.Filled.Undo" Color="MudBlazor.Color.Default"
+                           OnClick="() => UndoFieldEdit(nameof(GetProductDto.Name))"
+                           Disabled="@(Product.Name == ProductCopy.Name)" />
+        </div>
+
+        <br />
+
+        <div class="dialog-edit">
+            <MudTextField T="string" Label="Description" Placeholder="Enter description" Immediate="true"
+                          Text="@Product.Description" TextChanged="OnProductDescriptionChanged"></MudTextField>
+            <MudIconButton Icon="@Icons.Material.Filled.Undo" Color="MudBlazor.Color.Default"
+                           OnClick="() => UndoFieldEdit(nameof(GetProductDto.Description))"
+                           Disabled="@(Product.Description == ProductCopy.Description)" />
+        </div>
+
+        <br />
+
+        <div class="dialog-edit">
+            <MudNumericField T="decimal" Label="Price" Immediate="true"
+                             Value="@Product.Price" ValueChanged="OnProductPriceChanged"></MudNumericField>
+            <MudIconButton Icon="@Icons.Material.Filled.Undo" Color="MudBlazor.Color.Default"
+                           OnClick="() => UndoFieldEdit(nameof(GetProductDto.Price))"
+                           Disabled="@(Product.Price == ProductCopy.Price)" />
+        </div>
+
+        <br />
+
+        <div class="dialog-edit">
+            <MudTextField T="string" Label="PLU" Placeholder="Enter PLU number" Immediate="true"
+                          Text="@Product.PluNumber" TextChanged="OnProductPluChanged"></MudTextField>
+            <MudIconButton Icon="@Icons.Material.Filled.Undo" Color="MudBlazor.Color.Default"
+                           OnClick="() => UndoFieldEdit(nameof(GetProductDto.PluNumber))"
+                           Disabled="@(Product.PluNumber == ProductCopy.PluNumber)" />
+        </div>
+
+        <br />
+
+        <MudSelect T="int" Value="Product.TenantId"
+                   ValueChanged="OnTenantSelectionChanged"
+                   Placeholder="Select Tenant"
+                   Label="Tenant"
+                   Text="@(Product.TenantId == -1 ? "Select a tenant" : "")">
+            @foreach (var tenant in Tenants)
+            {
+                <MudSelectItem T="int" Value="@tenant.Id"> @tenant.Name </MudSelectItem>
+            }
+        </MudSelect>
+
+        <br />
+        Icon
+        <div class="dialog-edit">
+            <MudFileUpload @ref="ImageEdit" T="IBrowserFile" Accept=".png, .jpg"
+                           FilesChanged="OnImageFieldChange" MaximumFileCount="1">
+                <ActivatorContent>
+                    <MudButton Variant="Variant.Filled"
+                               Color="MudBlazor.Color.Primary"
+                               StartIcon="@Icons.Material.Filled.CloudUpload">
+                        Upload product icon
+                    </MudButton>
+                </ActivatorContent>
+            </MudFileUpload>
+            <MudIconButton Icon="@Icons.Material.Filled.Undo" Color="MudBlazor.Color.Default"
+                           OnClick="() => UndoFieldEdit(nameof(GetProductDto.Image))"
+                           Disabled="@(Product.Image == ProductCopy.Image)" />
+        </div>
+        <br />
+        <MudBadge Visible="@(Product.Image is not null && !Product.Image.All(b => b == 0x00))"
+                  Color="MudBlazor.Color.Error" Icon="@Icons.Material.Filled.Close" Overlap="true" Bordered="true" OnClick="RemoveImage">
+            <MudAvatar Size="MudBlazor.Size.Large" class="avatar">
+                @if (Product.Image is not null && !Product.Image.All(b => b == 0x00))
+                {
+                    <img src="@($"data:image/png;base64,{Convert.ToBase64String(Product.Image)}")" class="avatar-img" />
+                }
+                else
+                {
+                    <MudIcon Icon="@Icons.Material.Filled.Image" />
+                }
+            </MudAvatar>
+        </MudBadge>
+    </FormTemplate>
+
+    <FormTemplate2>
+
+        <div style="max-width: 400px; overflow-y: scroll;">
+
+            Set the branches at which this product is located and branch-specific prices if applicable:
+
+            @if (BranchList is not null)
+            {
+                @foreach (var branch in BranchList)
+                {
+                    <div class="branch-item" style="margin-bottom: 10px">
+                        <MudCheckBox @bind-Value="branch.IsAllocated">@branch.Name</MudCheckBox>
+                        <div style="margin-left: 50px; margin-top: -15px;">
+                            @if (branch.IsAllocated == true)
+                            {
+                                <MudCheckBox T="int" Size="Size.Small" Value="@(branch.Price == null ? 0 : 1)"
+                                             ValueChanged="@(() => OnBranchPriceChecked(branch.BranchId))">
+                                    <MudNumericField T="decimal?"
+                                                     Label="Branch-specific price"
+                                                     Placeholder="Use default product price"
+                                                     @bind-Value="branch.Price"
+                                                     Immediate="true"
+                                                     Disabled="@(branch.Price is null)">
+                                    </MudNumericField>
+                                </MudCheckBox>
+                            }
+                        </div>
+                    </div>
+                }
+            }
+
+        </div>
+
+    </FormTemplate2>
+
+</CreateUpdateDialog> *@

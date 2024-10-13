@@ -1,0 +1,18 @@
+﻿@using System.Reflection;
+
+@inject ISnackbar snackbar
+
+<MudDialog Style="min-width: 440px;">
+    <DialogContent>
+        <MudText Typo="Typo.body2">
+            @BodyText
+        </MudText>
+        @if (AddTextConfirmation == true)
+        {
+            <MudTextField T="string" @bind-Text="DeleteConfirmationText" Immediate="true" Placeholder="@("Enter \"DELETE\" To Confirm")" />
+        }
+    </DialogContent>
+    <DialogActions>
+        <MudButton Color="Color.Error" OnClick="Submit" Disabled="@((AddTextConfirmation) && (DeleteConfirmationText != "DELETE"))">@SubmitText</MudButton>
+    </DialogActions>
+</MudDialog>

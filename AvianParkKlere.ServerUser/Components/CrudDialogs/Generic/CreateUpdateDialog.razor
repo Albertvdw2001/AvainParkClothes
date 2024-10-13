@@ -1,0 +1,18 @@
+﻿
+@using System.Reflection;
+
+@inject ISnackbar snackbar
+
+<MudDialog Style="min-width: 440px;">
+    <DialogContent>
+        @if (FormTemplate is not null)
+        {
+            @FormTemplate
+        }
+    </DialogContent>
+    <DialogActions>
+        <MudButton Color="Color.Primary" Disabled="!SubmitButtonEnabled" OnClick="Submit">
+            @SubmitText
+        </MudButton>
+    </DialogActions>
+</MudDialog>

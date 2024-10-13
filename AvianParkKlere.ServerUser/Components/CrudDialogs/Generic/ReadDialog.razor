@@ -1,10 +1,13 @@
-﻿@using MudBlazor
+﻿@* @using ScanAndGo.AdminPortal.ServiceInterfaces
+@using ScanAndGo.AdminPortal.Services
+@using ScanAndGo.Contracts.Models.Dtos.Product
 @using System.Reflection;
 
+@inject ILocalizationService ls
 @inject ISnackbar snackbar
 
 <MudThemeProvider />
-<MudDialogProvider />
+
 <MudSnackbarProvider Style="
             position: fixed;
             top: 100px;
@@ -44,11 +47,8 @@
             }
         }
 
-
-
     </DialogContent>
     <DialogActions>
-        <MudButton OnClick="Close">Cancel</MudButton>
-        <MudButton Color="Color.Primary" Disabled="!SubmitButtonEnabled" OnClick="OnSubmit">@SubmitText</MudButton>
+        <MudButton OnClick="Close">Close</MudButton>
     </DialogActions>
-</MudDialog>
+</MudDialog> *@

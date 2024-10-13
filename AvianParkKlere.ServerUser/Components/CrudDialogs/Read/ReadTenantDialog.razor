@@ -1,0 +1,87 @@
+﻿
+@inject ISnackbar snackbar
+
+@* <MudDialog Style="width: 400px;">
+    <DialogContent>
+ *@
+        @* <div style="margin-top: 10px;">
+            @if (EmptyEmail)
+            {
+                <MudAlert Severity="Severity.Error">@ls.GetText("PleaseProvideYourEmail")</MudAlert>
+            }
+            else if (EmptyFirstName)
+            {
+                <MudAlert Severity="Severity.Error">@ls.GetText("PleaseProvideUsersFirstName")</MudAlert>
+            }
+            else if (EmptyLastName)
+            {
+                <MudAlert Severity="Severity.Error">@ls.GetText("PleaseProvideUsersLastName")</MudAlert>
+            }
+            else if (TenantUnselected)
+            {
+                <MudAlert Severity="Severity.Error">@ls.GetText("PleaseProvideATenant")</MudAlert>
+            }
+            else if (GenericError)
+            {
+                <MudAlert Severity="Severity.Error">@ls.GetText("ConnectionError")</MudAlert>
+            }
+        </div>
+
+        <MudForm Spacing="1" Style="margin-left: 25px; margin-right: 25px; margin-top: 10px;">
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                @if (UserDto.Avatar is not null && UserDto.Avatar.Length > 0)
+                {
+                    <MudBadge Color="MudBlazor.Color.Error"
+                              Icon="@Icons.Material.Filled.Close"
+                              Overlap="true"
+                              Bordered="true"
+                              OnClick="RemoveAvatar">
+
+                        <MudAvatar Size="MudBlazor.Size.Large">
+                            <img src="@($"data:image/png;base64,{Convert.ToBase64String(UserDto.Avatar)}")" class="avatar-img" />
+                        </MudAvatar>
+                    </MudBadge>
+                }
+                else
+                {
+                    <MudAvatar Color="Color.Primary" Variant="Variant.Outlined" Size="Size.Large">
+                        <MudIcon Icon="@Icons.Material.Filled.Person" Size="Size.Medium" />
+                    </MudAvatar>
+                }
+
+                <MudFileUpload T="IBrowserFile" FilesChanged="UploadFile" Accept=".png, .jpg, .jpeg" MaximumFileCount="1">
+                    <ActivatorContent>
+                        <MudButton Variant="Variant.Text" Color="Color.Success">Edit</MudButton>
+                    </ActivatorContent>
+                </MudFileUpload>
+            </div>
+
+            <MudTextField T="string" Immediate="true" Label="Email Address" @bind-Value="UserDto.Email" />
+            <MudTextField T="string" Immediate="true" Label="First Name" @bind-Value="UserDto.FirstName" />
+            <MudTextField T="string" Immediate="true" Label="Last Name" @bind-Value="UserDto.LastName" />
+
+            @if (Tenants is not null)
+            {
+                <MudSelect T="GetTenantDto" @bind-Value="SelectedTenant" ToStringFunc="@((GetTenantDto ? tenant) => tenant?.Name)" Label="Tenant">
+                    @foreach (var tenant in Tenants)
+                    {
+                        <MudSelectItem Value="tenant">@tenant.Name</MudSelectItem>
+                    }
+                </MudSelect>
+            } 
+
+        </MudForm>*@
+  @*   </DialogContent>
+    <DialogActions>
+        <MudButton Color="Color.Primary" Style="margin-top: 10px;">Done</MudButton>
+    </DialogActions>
+</MudDialog>
+
+<style>
+
+    .avatar-img {
+        width: 100%; /* Ensure the image fills the avatar container */
+        height: 100%; /* Ensure the image fills the avatar container */
+        object-fit: cover; /* Maintain aspect ratio and cover the entire avatar */
+    }
+        </style>*@

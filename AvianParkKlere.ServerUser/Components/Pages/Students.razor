@@ -1,24 +1,16 @@
 ﻿@page "/students"
 
 @using AvianParkKlere.Contracts.Dtos.Student
-@using AvianParkKlere.ServerUser.Components.Dialogs
+@using AvianParkKlere.ServerUser.Components.CrudDialogs.Generic
 @using AvianParkKlere.ServerUser.Components.Shared
 @using AvianParkKlere.ServerUser.Services
 @using MudBlazor
 
-@inject ApiService apiService
-@inject ISnackbar snackbar
+@inject ApiService _apiService
+@inject ISnackbar _snackbar
+@inject IDialogService _dialogService   
 
 @rendermode InteractiveServer
-
-<MudThemeProvider />
-<MudDialogProvider />
-<MudSnackbarProvider Style="
-            position: fixed;
-            top: 100px;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            -webkit-transform: translate(-50%, -50%);" />
 
 @* Data Grid *@
 
@@ -37,9 +29,26 @@
         <MudTd DataLabel="Price">@context.Age</MudTd>
         <MudTd DataLabel="PLU">@context.Grade</MudTd>
     </RowTemplate>
-         </GenericDataGrid>
+</GenericDataGrid>
 
-@* Dialogs *@    
-@* CREATE *@
- <CreateUpdateDialog @ref="CreateDialog"
-    SubmitMethod="HandleCreateStudent" /> 
+@* Dialogs *@
+
+@* <CreateUpdateDialog @ref="CreateDialog" 
+    TitleText="Create Student" 
+    SubmitText="Create" 
+    SubmitMethod="@HandleCreateStudent"
+                    SubmitButtonEnabled="@Validated"
+    OnClose="@GetStudentList" >
+    <FormTemplate>
+    <MudForm FieldChanged="ValidateForm">
+        <MudTextField @bind-Value="CreateDialogStudent.Name" Label="Name" Required="true" Immediate="true" />
+
+        <MudTextField @bind-Value="CreateDialogStudent.Surname" Label="Surname" Required="true" Immediate="true" />
+
+        <MudNumericField @bind-Value="CreateDialogStudent.Age" Label="Age" Required="true" Immediate="true" />
+
+        <MudNumericField @bind-Value="CreateDialogStudent.Grade" Label="Grade" Required="true" Immediate="true" />
+    </MudForm>
+    </FormTemplate>
+</CreateUpdateDialog> *@
+    

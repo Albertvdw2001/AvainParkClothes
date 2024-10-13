@@ -1,0 +1,157 @@
+﻿@* @using ScanAndGo.AdminPortal.Localization.Models
+@using ScanAndGo.AdminPortal.ServiceInterfaces
+@using ScanAndGo.AdminPortal.ServiceInterfaces.Api
+@using ScanAndGo.Contracts.Constants
+
+@inject ITenantApiService _tenantApiService
+@inject ISnackbar snackbar
+@inject ILocalizationService ls
+@inject AuthenticationStateProvider _authStateProvider
+
+<MudDialog Style="width: 800px;">
+    <DialogContent>
+
+        <div style="margin-top: 10px;">
+
+            @if (EmptyName)
+            {
+                <MudAlert Severity="Severity.Error">@ls.GetText("PleaseProvideAName")</MudAlert>
+            }
+            else if (EmptyEmail)
+            {
+                <MudAlert Severity="Severity.Error">@ls.GetText("PleaseProvideAnEmail")</MudAlert>
+            }
+            else if (EmptyLogo)
+            {
+                <MudAlert Severity="Severity.Error">@ls.GetText("PleaseProvideALogo")</MudAlert>
+            }
+            else if (EmptyAddress)
+            {
+                <MudAlert Severity="Severity.Error">@ls.GetText("PleaseProvideUsersFirstName")</MudAlert>
+            }
+            else if (EmptyLanguageCode)
+            {
+                <MudAlert Severity="Severity.Error">@ls.GetText("PleaseProvideALanguage")</MudAlert>
+            }
+            else if (EmptyCurrency)
+            {
+                <MudAlert Severity="Severity.Error">@ls.GetText("PleaseProvideACurrency")</MudAlert>
+            }
+            else if (EmptyPhone)
+            {
+                <MudAlert Severity="Severity.Error">@ls.GetText("PleaseProvideAPhone")</MudAlert>
+            }
+            else if (EmptyPrimaryColor)
+            {
+                <MudAlert Severity="Severity.Error">@ls.GetText("PleasePorvideAPrimaryColor")</MudAlert>
+            }
+            else if (EmptySecondaryColor)
+            {
+                <MudAlert Severity="Severity.Error">@ls.GetText("PleaseProvideASecondaryColor")</MudAlert>
+            }
+            else if (GenericError)
+            {
+                <MudAlert Severity="Severity.Error">@ls.GetText("GenericError")</MudAlert>
+            }
+
+        </div>
+
+        <MudForm Spacing="1" Style="margin-left: 25px; margin-right: 25px; margin-top: 10px;">
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                @if (TenantDto.Logo is not null && TenantDto.Logo.Length > 0)
+                {
+                    <MudBadge Color="MudBlazor.Color.Error"
+                              Icon="@Icons.Material.Filled.Close"
+                              Overlap="true"
+                              Bordered="true"
+                              OnClick="RemoveLogo">
+
+                        <MudAvatar Style="width: 100px; height: 100px;">
+                            <img src="@($"data:image/png;base64,{Convert.ToBase64String(TenantDto.Logo)}")" class="avatar-img" />
+                        </MudAvatar>
+                    </MudBadge>
+                }
+                else
+                {
+                    <MudAvatar Color="Color.Primary" Variant="Variant.Outlined" Style="width: 100px; height: 100px;">
+                        <MudIcon Icon="@Icons.Material.Filled.Domain" Size="Size.Large" />
+                    </MudAvatar>
+                }
+
+                <MudFileUpload T="IBrowserFile" FilesChanged="UploadFile" Accept=".png, .jpg, .jpeg" MaximumFileCount="1">
+                    <ActivatorContent>
+                        <MudButton Variant="Variant.Text" Color="Color.Success">Edit</MudButton>
+                    </ActivatorContent>
+                </MudFileUpload>
+            </div>
+
+            <div class="flex-container">
+                <MudTextField T="string" Immediate="true" Label="Name" @bind-Value="TenantDto.Name" />
+                <MudTextField T="string" Immediate="true" Label="Email Address" @bind-Value="TenantDto.Email" />
+            </div>
+            <div class="flex-container">
+                <MudTextField T="string" Immediate="true" Label="Phone" @bind-Value="TenantDto.Phone" />
+                <MudTextField T="string" Immediate="true" Label="Address" @bind-Value="TenantDto.Address" />
+            </div>
+            <div class="flex-container">
+                @if (Cultures is not null)
+                {
+                    <MudSelect T="Culture" @bind-Value="SelectedCulture" ToStringFunc="@((Culture ? culture) => culture?.Name)" Label="Default Language">
+                        @foreach (var culture in Cultures)
+                        {
+                            <MudSelectItem Value="culture">
+                                <span style="display: flex; align-items: center;">
+                                    @((MarkupString)culture.Icon)
+                                    <MudText Style="margin-left: 15px;">
+                                        @culture.Name
+                                    </MudText>
+                                </span>
+                            </MudSelectItem>
+                        }
+                    </MudSelect>
+                }
+                @if (Currencies is not null)
+                {
+                    <MudSelect T="Currency" @bind-Value="SelectedCurrency" ToStringFunc="@((Currency ? currency) => currency?.Name)" Label="Currency">
+                        @foreach (var currency in Currencies)
+                        {
+                            <MudSelectItem Value="currency">
+                                <span style="display: flex; align-items: center;">
+                                    @((MarkupString)currency.Icon)
+                                    <MudText Style="margin-left: 15px;">
+                                        @currency.Name (@currency.Symbol)
+                                    </MudText>
+                                </span>
+                            </MudSelectItem>
+                        }
+                    </MudSelect>
+                }
+            </div>
+            <div class="flex-container" style="margin-bottom: 10px;">
+                <MudColorPicker Label="Primary Color" ThrottleInterval="1" ShowAlpha="false" DragEffect="true" @bind-Text="TenantDto.PrimaryColor" PickerVariant="PickerVariant.Dialog" />
+                <MudColorPicker Label="Secondary Color" ThrottleInterval="1" ShowAlpha="false" DragEffect="true" @bind-Text="TenantDto.SecondaryColor" PickerVariant="PickerVariant.Dialog" />
+            </div>
+        </MudForm>
+    </DialogContent>
+    <DialogActions>
+        <MudButton Color="Color.Primary" OnClick="Submit" Style="margin-top: 10px;">Save Changes</MudButton>
+    </DialogActions>
+</MudDialog>
+
+<style>
+    .flex-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px; /* Adjust the gap between fields as needed */
+    }
+
+    .flex-container > * {
+        flex: 1 1 150px; /* Adjust the minimum width as needed */
+    }
+
+    .avatar-img {
+        width: 100%; /* Ensure the image fills the avatar container */
+        height: 100%; /* Ensure the image fills the avatar container */
+        object-fit: cover; /* Maintain aspect ratio and cover the entire avatar */
+    }
+</style> *@
