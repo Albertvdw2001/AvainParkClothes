@@ -1,0 +1,67 @@
+﻿@using AutoMapper
+@using AvianParkKlere.ServerUser.Components.CrudDialogs.Generic
+
+@inject ISnackbar Snackbar
+@inject IDialogService _dialogService
+@inject IMapper _mapper
+
+<CreateUpdateDialog SubmitButtonEnabled="@Validated"
+                    OnSubmit="@Update"
+                    SubmitText="Save Changes">
+
+    <FormTemplate>
+        <MudForm FieldChanged="ValidateForm"
+
+        <div class="dialog-edit">
+            <MudTextField T="string" Label="Name" Placeholder="Enter name" Immediate="true"
+                @bind-Text="Student.Name"></MudTextField>
+            <MudIconButton Icon="@Icons.Material.Filled.Undo" Color="MudBlazor.Color.Default"
+                           OnClick="() => UndoFieldEdit(nameof(Student.Name))"
+                           Disabled="@(Student.Name == StudentCopy.Name)" />
+        </div>
+
+        <br />
+
+        <div class="dialog-edit">
+            <MudTextField T="string" Label="Surname" Placeholder="Enter surname" Immediate="true"
+                @bind-Text="Student.Surname"></MudTextField>
+            <MudIconButton Icon="@Icons.Material.Filled.Undo" Color="MudBlazor.Color.Default"
+                           OnClick="() => UndoFieldEdit(nameof(Student.Surname))"
+                           Disabled="@(Student.Surname == StudentCopy.Surname)" />
+        </div>
+
+        <br />
+
+        <div class="dialog-edit">
+            <MudTextField T="string" Label="Description" Placeholder="Enter description" Immediate="true"
+                          Text="@Student.Description" TextChanged="OnProductDescriptionChanged"></MudTextField>
+            <MudIconButton Icon="@Icons.Material.Filled.Undo" Color="MudBlazor.Color.Default"
+                           OnClick="() => UndoFieldEdit(nameof(GetProductDto.Description))"
+                           Disabled="@(Student.Description == ProductCopy.Description)" />
+        </div>
+
+        <br />
+
+        <div class="dialog-edit">
+            <MudNumericField T="decimal" Label="Price" Immediate="true"
+                             Value="@Student.Price" ValueChanged="OnProductPriceChanged"></MudNumericField>
+            <MudIconButton Icon="@Icons.Material.Filled.Undo" Color="MudBlazor.Color.Default"
+                           OnClick="() => UndoFieldEdit(nameof(GetProductDto.Price))"
+                           Disabled="@(Student.Price == ProductCopy.Price)" />
+        </div>
+
+        <br />
+
+        <div class="dialog-edit">
+            <MudTextField T="string" Label="PLU" Placeholder="Enter PLU number" Immediate="true"
+                          Text="@Student.PluNumber" TextChanged="OnProductPluChanged"></MudTextField>
+            <MudIconButton Icon="@Icons.Material.Filled.Undo" Color="MudBlazor.Color.Default"
+                           OnClick="() => UndoFieldEdit(nameof(GetProductDto.PluNumber))"
+                           Disabled="@(Student.PluNumber == ProductCopy.PluNumber)" />
+        </div>
+
+        </MudForm>
+
+    </FormTemplate>
+
+</CreateUpdateDialog> 

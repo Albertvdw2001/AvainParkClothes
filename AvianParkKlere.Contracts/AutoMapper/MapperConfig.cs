@@ -11,6 +11,8 @@ namespace AvianParkKlere.Contracts.AutoMapper
         public MapperConfig()
         {
             /* Student */
+            CreateMap<StudentPutDto, StudentPutDto>().ReverseMap();
+
             CreateMap<Student, StudentGetDto>().ReverseMap();
             CreateMap<Student, StudentPostDto>().ReverseMap();
             CreateMap<Student, StudentPutDto>().ReverseMap();
