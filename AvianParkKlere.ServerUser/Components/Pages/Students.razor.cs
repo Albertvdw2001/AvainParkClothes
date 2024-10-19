@@ -1,5 +1,4 @@
-﻿using AvainParkKlere.Api.EntityFrameworkCore.Entities;
-using AvianParkKlere.Contracts.Dtos.Student;
+﻿using AvianParkKlere.Contracts.Dtos.Student;
 using AvianParkKlere.ServerUser.Components.CrudDialogs.Create;
 using AvianParkKlere.ServerUser.Components.CrudDialogs.Generic;
 using AvianParkKlere.ServerUser.Components.Shared;
