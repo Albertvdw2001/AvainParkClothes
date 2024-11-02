@@ -27,7 +27,12 @@ namespace AvianParkKlere.ServerUser.Services
         public async Task<bool> CreateStudent(StudentPostDto student)
         {
             var response = await httpClient.PostAsJsonAsync("Student", student);
+            return response.IsSuccessStatusCode;
+        }
 
+        public async Task<bool> DeleteStudent(int id)
+        {
+            var response = await httpClient.DeleteAsync($"Student/{id}");
             return response.IsSuccessStatusCode;
         }
 

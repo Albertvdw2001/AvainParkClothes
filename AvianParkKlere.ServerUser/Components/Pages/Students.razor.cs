@@ -72,7 +72,42 @@ namespace AvianParkKlere.ServerUser.Components.Pages
                 await GetStudentList();
                 CruDialog.Close();
             }
-            
+        }
+
+
+        private async Task OpenDeleteDialog(StudentGetDto student)
+        {
+            var parameters = new DialogParameters<DeleteDialog>
+            {
+                { x => x.BodyText, "Are you sure you want to remove this student from the database?"}
+            };
+
+            CruDialog = await _dialogService.ShowAsync<DeleteDialog>(
+                "Delete Student",
+                parameters,
+                new DialogOptions { CloseButton = true, BackdropClick = false, Position = DialogPosition.TopCenter }
+            );
+
+            var result = await CruDialog.Result;
+            if (!result.Canceled)
+            {
+                await HandleDeleteStudent(student.Id);
+            }
+        }
+
+
+        private async Task HandleDeleteStudent(int id)
+        {
+            var apiResposnse = await _apiService.DeleteStudent(id);
+
+            if (apiResposnse == false)
+            {
+                ShowErrorSnackbar("Failed to delete student");
+                return;
+            }
+            ShowSuccessSnackbar("Student deleted successfully");
+            await GetStudentList();
+            StateHasChanged();
         }
 
 

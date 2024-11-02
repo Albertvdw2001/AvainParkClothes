@@ -1,4 +1,4 @@
-﻿@page "/students"
+﻿@page "/"
 
 @using AvianParkKlere.Contracts.Dtos.Student
 @using AvianParkKlere.ServerUser.Components.CrudDialogs.Generic
@@ -6,9 +6,9 @@
 @using AvianParkKlere.ServerUser.Services
 @using MudBlazor
 
-@inject ApiService _apiService
 @inject ISnackbar _snackbar
 @inject IDialogService _dialogService   
+@inject ApiService _apiService  
 
 @rendermode InteractiveServer
 
@@ -20,6 +20,7 @@
                 TGet="StudentGetDto"
                 TCreate="StudentPostDto"
                 TUpdate="StudentPutDto"
+                OnDeleteItem="OpenDeleteDialog"
                 OnCreateNewItem="OpenCreateDialog"
                 EnableCrudOptions="true" >
     <RowTemplate>
@@ -31,24 +32,4 @@
     </RowTemplate>
 </GenericDataGrid>
 
-@* Dialogs *@
-
-@* <CreateUpdateDialog @ref="CreateDialog" 
-    TitleText="Create Student" 
-    SubmitText="Create" 
-    SubmitMethod="@HandleCreateStudent"
-                    SubmitButtonEnabled="@Validated"
-    OnClose="@GetStudentList" >
-    <FormTemplate>
-    <MudForm FieldChanged="ValidateForm">
-        <MudTextField @bind-Value="CreateDialogStudent.Name" Label="Name" Required="true" Immediate="true" />
-
-        <MudTextField @bind-Value="CreateDialogStudent.Surname" Label="Surname" Required="true" Immediate="true" />
-
-        <MudNumericField @bind-Value="CreateDialogStudent.Age" Label="Age" Required="true" Immediate="true" />
-
-        <MudNumericField @bind-Value="CreateDialogStudent.Grade" Label="Grade" Required="true" Immediate="true" />
-    </MudForm>
-    </FormTemplate>
-</CreateUpdateDialog> *@
     
