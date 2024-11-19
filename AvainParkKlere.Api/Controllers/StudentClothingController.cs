@@ -40,6 +40,17 @@ namespace AvainParkKlere.Api.Controllers
             return Ok(result);
         }
 
+
+        [HttpGet("clothing-for-student/{studentId}")]    
+        public async Task<ActionResult<List<StudentClothingGetDto>?>> GetByStudent(int studentId)
+        {
+            var response = await studentClothingRepository.GetStudentClothingByStudent(studentId);
+            var result = mapper.Map<List<StudentClothingGetDto>>(response);
+
+            return Ok(result);
+        }
+
+
         [HttpPost]
         public async Task<ActionResult> Create(StudentClothingPostDto studentClothingPostDto)
         {

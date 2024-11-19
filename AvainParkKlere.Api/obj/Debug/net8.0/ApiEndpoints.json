@@ -78,6 +78,32 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "AvainParkKlere.Api.Controllers.StudentClothingController",
+    "Method": "GetByStudent",
+    "RelativePath": "clothing-for-student/{studentId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "studentId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[AvianParkKlere.Contracts.Dtos.StudentClothing.StudentClothingGetDto, AvianParkKlere.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "AvainParkKlere.Api.Controllers.ClothingController",
     "Method": "GetById",
     "RelativePath": "Clothing/{id}",

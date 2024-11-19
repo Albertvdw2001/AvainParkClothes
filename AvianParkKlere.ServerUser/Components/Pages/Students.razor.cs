@@ -1,6 +1,7 @@
 ﻿using AvianParkKlere.Contracts.Dtos.Student;
 using AvianParkKlere.ServerUser.Components.CrudDialogs.Create;
 using AvianParkKlere.ServerUser.Components.CrudDialogs.Generic;
+using AvianParkKlere.ServerUser.Components.CrudDialogs.Read;
 using AvianParkKlere.ServerUser.Components.Shared;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
@@ -108,6 +109,22 @@ namespace AvianParkKlere.ServerUser.Components.Pages
             ShowSuccessSnackbar("Student deleted successfully");
             await GetStudentList();
             StateHasChanged();
+        }
+
+
+        private async Task OpenViewDialog(StudentGetDto student)
+        {
+            var parameters = new DialogParameters<ViewStudentDialog>
+            {
+                { x => x.Student, student}
+            };
+
+            CruDialog = await _dialogService.ShowAsync<ViewStudentDialog>(
+                "View Student Clothes",
+                parameters,
+                new DialogOptions { CloseButton = true, BackdropClick = false, Position = DialogPosition.TopCenter }
+            );  
+
         }
 
 

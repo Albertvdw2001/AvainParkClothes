@@ -123,9 +123,7 @@ else
 
         @if (RowTemplate is not null)
         {
-
             @RowTemplate(context)
-
         }
         
         @if (EnableCrudOptions)
@@ -139,7 +137,10 @@ else
                 <MudIconButton Icon="@Icons.Material.Outlined.Delete" Size="Size.Medium" Color="Color.Error" OnClick="() => OpenDeleteDialogAsync(context)"></MudIconButton> @* OnClick="DeleteItemAsync(context)" *@
             </MudTd>
         }
-    </RowTemplate>
+        <MudTd DataLabel="View">
+            <MudIconButton Icon="@Icons.Material.Outlined.Visibility" Size="Size.Medium" Color="Color.Info" OnClick="() => OpenViewItemAsync(context)"></MudIconButton>   
+        </MudTd>
+        </RowTemplate>
 
     <PagerContent>
         <MudTablePager PageSizeOptions="new int[]{10, 25, 50, 100}" />

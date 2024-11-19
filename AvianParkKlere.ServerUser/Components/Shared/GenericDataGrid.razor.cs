@@ -18,6 +18,7 @@ public partial class GenericDataGrid<TGet, TCreate, TUpdate>
     [Parameter] public List<string> SearchFields { get; set; } = new();
     [Parameter] public EventCallback OnCreateNewItem { get; set; }
     [Parameter] public EventCallback<TGet> OnUpdateItem { get; set; }
+    [Parameter] public EventCallback<TGet> OnViewItem { get; set; }
     [Parameter] public EventCallback<TGet> OnDeleteItem { get; set; }
     [Parameter] public EventCallback<IEnumerable<TGet>> OnDeleteItems { get; set; }
     [Parameter] public EventCallback<IEnumerable<TGet>> OnDeleteSelectedItems { get; set; }
@@ -113,6 +114,15 @@ public partial class GenericDataGrid<TGet, TCreate, TUpdate>
             await OnDeleteItem.InvokeAsync(item);
         }
     }
+
+
+    private async Task OpenViewItemAsync(TGet item)
+    {
+        if (OnViewItem.HasDelegate)
+        {
+            await OnViewItem.InvokeAsync(item);
+        }
+    }   
 
 
     private async Task DeleteAllItemsAsync()

@@ -8,7 +8,6 @@ namespace AvainParkKlere.Api.Repositories
     {
         public ClothingRepository(AvianParkDbContext ApDbContext) : base(ApDbContext)
         {
-
         }
     }
    
