@@ -1,15 +1,30 @@
-﻿@using AvianParkKlere.Contracts.Dtos.Clothing
+﻿@page "/clothes"
+
+@using AvianParkKlere.Contracts.Dtos.Clothing
 @using AvianParkKlere.ServerUser.Components.Shared
+@using AvianParkKlere.ServerUser.Services
+
+@inject IDialogService _dialogService
+@inject ApiService _apiService
+@inject ISnackbar _snackbar 
 
 @* Data Grid *@
 
 <GenericDataGrid @ref="Table"
                  Items="ClothingList"
-                 HeaderTitles="@(["Id", "Name", "Surname", "Age", "Grade"])"
+                 HeaderTitles="@(["Id", "Name", "Size Measurement", "Price"])"
                  TGet="ClothingGetDto"
                  TCreate="ClothingPostDto"
                  TUpdate="ClothingPutDto"
-                 EnableCrudOptions="true" />
+                 EnableCrudOptions="true"> 
+    <RowTemplate>
+                 OnCreateNewItem="OpenCreateDialog">
+        <MudTd DataLabel="Id">@context.Id</MudTd>
+        <MudTd DataLabel="Name">@context.Name</MudTd>
+        <MudTd DataLabel="Size Measurement">@context.SizeMeasurement</MudTd>
+        <MudTd DataLabel="Price">@context.Price</MudTd>
+    </RowTemplate>
+  </GenericDataGrid>
 
 @* Dialogs *@
 

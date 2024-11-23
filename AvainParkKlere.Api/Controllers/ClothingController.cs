@@ -12,10 +12,10 @@ namespace AvainParkKlere.Api.Controllers
     [Route("[controller]")]
     public class ClothingController : ControllerBase
     {
-        private readonly ClothingRepository clothingRepository;
+        private readonly IClothingRepository clothingRepository;
         private readonly IMapper mapper;
 
-        public ClothingController(ClothingRepository clothingRepository, IMapper mapper)
+        public ClothingController(IClothingRepository clothingRepository, IMapper mapper)
         {
             this.clothingRepository = clothingRepository;
             this.mapper = mapper;

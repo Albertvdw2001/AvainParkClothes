@@ -1,0 +1,16 @@
+﻿@using AvianParkKlere.ServerUser.Components.CrudDialogs.Generic
+@using MudBlazor
+
+<CreateUpdateDialog OnSubmit="Submit" SubmitButtonEnabled="@Validated">
+    <FormTemplate>
+        <MudForm FieldChanged="ValidateForm">
+
+            <MudTextField @bind-Value="Clothing.Name" Label="Name" Required="true" />
+
+            <MudTextField @bind-Value="Clothing.SizeMeasurement" Label="Size measurement" Required="true" />
+
+            <MudNumericField @bind-Value="Clothing.Price" Label="Price"  />
+
+        </MudForm>
+    </FormTemplate>
+</CreateUpdateDialog> 
