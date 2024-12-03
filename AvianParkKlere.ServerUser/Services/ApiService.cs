@@ -23,6 +23,15 @@ namespace AvianParkKlere.ServerUser.Services
             return response;
         }
 
+        public async Task<StudentGetDto?> GetStudent(int id)
+        {
+            var response = await httpClient.GetAsync($"Student/{id}");
+            var content = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<StudentGetDto>(content);
+
+            return result;
+        }   
+
         public async Task<bool> CreateStudent(StudentPostDto student)
         {
             var response = await httpClient.PostAsJsonAsync("Student", student);
@@ -78,6 +87,15 @@ namespace AvianParkKlere.ServerUser.Services
 
             return result;
         }
+
+        public async Task<List<StudentClothingGetDto>> GetStudentForClothing(int clothingId)
+        {
+            var response = await httpClient.GetAsync($"StudentClothing/Clothing/{clothingId}");
+            var content = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<List<StudentClothingGetDto>>(content);
+
+            return result;
+        }   
 
     }
 }

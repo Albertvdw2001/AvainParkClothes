@@ -19,5 +19,12 @@ namespace AvainParkKlere.Api.Repositories
             var response = await _apDbContext.StudentClothes.Where(sc => sc.StudentId == studentId).ToListAsync();
             return response;
         }
+
+        public async Task<List<StudentClothing>> GetStudentClothingByClothing(int clothingId)
+        {
+            var response = await _apDbContext.StudentClothes.Where(sc => sc.ClothingId == clothingId).ToListAsync();
+            return response;
+        }   
+
     }
 }

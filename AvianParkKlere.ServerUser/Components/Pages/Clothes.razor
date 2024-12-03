@@ -16,9 +16,9 @@
                  TGet="ClothingGetDto"
                  TCreate="ClothingPostDto"
                  TUpdate="ClothingPutDto"
-                 EnableCrudOptions="true"> 
-    <RowTemplate>
+                 EnableCrudOptions="true" 
                  OnCreateNewItem="OpenCreateDialog">
+    <RowTemplate>
         <MudTd DataLabel="Id">@context.Id</MudTd>
         <MudTd DataLabel="Name">@context.Name</MudTd>
         <MudTd DataLabel="Size Measurement">@context.SizeMeasurement</MudTd>

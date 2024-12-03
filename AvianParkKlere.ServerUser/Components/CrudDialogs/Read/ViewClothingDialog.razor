@@ -1,0 +1,29 @@
+﻿@using AvianParkKlere.ServerUser.Services
+@inject MudBlazor.ISnackbar Snackbar
+@inject NavigationManager NavigationManager
+@inject ApiService _apiService
+
+<MudDialog>
+    <TitleContent>@Clothing.Name</TitleContent>
+
+    <DialogContent>
+        <MudTable Items="@StudentList" Striped="true" Bordered="true">
+            <HeaderContent>
+                <MudTh>Type</MudTh>
+                <MudTh></MudTh>
+                <MudTh>Price</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Type">@context.</MudTd>
+                <MudTd DataLabel="Size">@context.SizeMeasurement</MudTd>
+                <MudTd DataLabel="Price">R @context.Price</MudTd>
+            </RowTemplate>
+        </MudTable>
+    </DialogContent>
+
+    <DialogActions>
+        <MudButton Color="Color.Primary" OnClick="DownloadPdf">
+            Download as PDF
+        </MudButton>
+    </DialogActions>
+</MudDialog>
