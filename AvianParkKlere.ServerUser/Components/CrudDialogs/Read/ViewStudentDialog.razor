@@ -9,13 +9,13 @@
     <DialogContent>
         <MudTable Items="@ClothesList" Striped="true" Bordered="true">
             <HeaderContent>
-                <MudTh>Type</MudTh>
-                <MudTh></MudTh>
+                <MudTh>Name</MudTh>
+                <MudTh>Size</MudTh>
                 <MudTh>Price</MudTh>
             </HeaderContent>
             <RowTemplate>
                 <MudTd DataLabel="Type">@context.Name</MudTd>
-                <MudTd DataLabel="Size">@context.SizeMeasurement</MudTd>
+                <MudTd DataLabel="Size">@context.Size</MudTd>
                 <MudTd DataLabel="Price">R @context.Price</MudTd>
             </RowTemplate>
         </MudTable>

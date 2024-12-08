@@ -9,14 +9,18 @@
     <DialogContent>
         <MudTable Items="@StudentList" Striped="true" Bordered="true">
             <HeaderContent>
-                <MudTh>Type</MudTh>
-                <MudTh></MudTh>
-                <MudTh>Price</MudTh>
+                <MudTh>Name</MudTh>
+                <MudTh>Surname</MudTh>
+                <MudTh>Grade</MudTh>
+                <MudTh>Age</MudTh>
+                <MudTh>Size</MudTh>
             </HeaderContent>
             <RowTemplate>
-                <MudTd DataLabel="Type">@context.</MudTd>
-                <MudTd DataLabel="Size">@context.SizeMeasurement</MudTd>
-                <MudTd DataLabel="Price">R @context.Price</MudTd>
+                <MudTd DataLabel="Name">@context.Name</MudTd>
+                <MudTd DataLabel="Surname">@context.Surname</MudTd>
+                <udTMd DataLabel="Grade">Gr. @context.Grade</udTMd>
+                <MudTd DataLabel="Age">@context.Age</MudTd>
+                <MudTd DataLabel="Size">@context.Size (@context.SizeMeasurement)</MudTd>
             </RowTemplate>
         </MudTable>
     </DialogContent>
