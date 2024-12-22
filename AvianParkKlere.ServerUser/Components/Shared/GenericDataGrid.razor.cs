@@ -22,6 +22,8 @@ public partial class GenericDataGrid<TGet, TCreate, TUpdate>
     [Parameter] public EventCallback<TGet> OnDeleteItem { get; set; }
     [Parameter] public EventCallback<IEnumerable<TGet>> OnDeleteItems { get; set; }
     [Parameter] public EventCallback<IEnumerable<TGet>> OnDeleteSelectedItems { get; set; }
+    [Parameter] public EventCallback<TGet> OnAssign { get; set; }
+    [Parameter] public string AssignIcon { get; set; }   
     [Parameter] public EventCallback OnExportAllToCSV { get; set; }
     [Parameter] public EventCallback OnExportAllToPDF { get; set; }
     [Parameter] public EventCallback<IEnumerable<TGet>> OnExportSelectedToCSV { get; set; }
@@ -143,7 +145,15 @@ public partial class GenericDataGrid<TGet, TCreate, TUpdate>
     }
 
 
-    private async Task DeleteSelectedItemsAsync(IEnumerable<TGet> selectedItems)
+    public async Task AssignItem(TGet getDto)
+    {
+        if (OnAssign.HasDelegate)
+        {
+            await OnAssign.InvokeAsync(getDto);
+        }
+    }
+
+        private async Task DeleteSelectedItemsAsync(IEnumerable<TGet> selectedItems)
     {
         if (OnDeleteItems.HasDelegate)
         {

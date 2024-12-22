@@ -1,9 +1,11 @@
 ﻿using AvianParkKlere.Contracts.Dtos.Clothing;
 using AvianParkKlere.Contracts.Dtos.Student;
+using AvianParkKlere.Contracts.Dtos.StudentClothing;
 using AvianParkKlere.ServerUser.Components.CrudDialogs.Create;
 using AvianParkKlere.ServerUser.Components.CrudDialogs.Generic;
 using AvianParkKlere.ServerUser.Components.CrudDialogs.Read;
 using AvianParkKlere.ServerUser.Components.Shared;
+using AvianParkKlere.ServerUser.Models;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 
@@ -55,6 +57,53 @@ namespace AvianParkKlere.ServerUser.Components.Pages
                 parameters,
                 new DialogOptions { CloseButton = true, BackdropClick = false, Position = DialogPosition.TopCenter }
             );
+        }
+
+        private async Task OpenAssignDialog(ClothingGetDto clothing)
+        {
+            var studentClothingList = await _apiService.GetStudentForClothing(clothing.Id);
+            var students = await _apiService.GetStudents();     
+
+            if (studentClothingList == null)
+            {
+                ShowErrorSnackbar("Failed to get student list for clothing");
+                return;
+            }
+
+            var parameters = new DialogParameters<AssignStudentsDialog>
+            {
+                { x => x.Clothing, clothing},
+                { x => x.StudentClothingList, studentClothingList},
+                { x => x.AllStudents, students},
+                { x => x.OnAssign, EventCallback.Factory.Create<List<StudentSelection>>(this, HandleAssignStudents)}
+            };
+
+            CruDialog = await _dialogService.ShowAsync<AssignStudentsDialog>(
+                $"Assign {clothing.Name} to Students",
+                parameters,
+                new DialogOptions { CloseButton = true, BackdropClick = false, Position = DialogPosition.TopCenter }
+            );
+        }
+
+
+        private async Task HandleAssignStudents(List<StudentSelection> studentSelections)
+        {
+            foreach (var selection in studentSelections)
+            {
+                var apiResponse = await _apiService.AddOrDeleteAssignedStudents(selection.ClothingId, selection);
+                if (apiResponse == false)
+                {
+                    ShowErrorSnackbar("Student assignment failed. Please contact Albert or try again.");
+                    return;
+                }
+            }
+
+            ShowSuccessSnackbar("Students assigned successfully");
+            if (CruDialog is not null)
+            {
+                await GetClothesList();
+                CruDialog.Close();
+            }
         }
 
 
@@ -113,15 +162,15 @@ namespace AvianParkKlere.ServerUser.Components.Pages
         }
 
 
-        private async Task OpenViewDialog(StudentGetDto student)
+        private async Task OpenViewDialog(ClothingGetDto clothing)
         {
-            var parameters = new DialogParameters<ViewStudentDialog>
+            var parameters = new DialogParameters<ViewClothingDialog>
             {
-                { x => x.Student, student}
+                { x => x.Clothing, clothing}
             };
 
-            CruDialog = await _dialogService.ShowAsync<ViewStudentDialog>(
-                "View Student Clothes",
+            CruDialog = await _dialogService.ShowAsync<ViewClothingDialog>(
+                "View Students",
                 parameters,
                 new DialogOptions { CloseButton = true, BackdropClick = false, Position = DialogPosition.TopCenter }
             );

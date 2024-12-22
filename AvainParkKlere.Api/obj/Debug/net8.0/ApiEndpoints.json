@@ -1,47 +1,5 @@
 [
   {
-    "ContainingType": "AvainParkKlere.Api.Controllers.StudentClothingController",
-    "Method": "GetById",
-    "RelativePath": "{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "AvianParkKlere.Contracts.Dtos.StudentClothing.StudentClothingGetDto",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "AvainParkKlere.Api.Controllers.StudentClothingController",
-    "Method": "Delete",
-    "RelativePath": "{id}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
     "ContainingType": "AvainParkKlere.Api.Controllers.ClothingController",
     "Method": "Get",
     "RelativePath": "Clothing",
@@ -76,32 +34,6 @@
       }
     ],
     "ReturnTypes": []
-  },
-  {
-    "ContainingType": "AvainParkKlere.Api.Controllers.StudentClothingController",
-    "Method": "GetByStudent",
-    "RelativePath": "clothing-for-student/{studentId}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "studentId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.List\u00601[[AvianParkKlere.Contracts.Dtos.StudentClothing.StudentClothingGetDto, AvianParkKlere.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
   },
   {
     "ContainingType": "AvainParkKlere.Api.Controllers.ClothingController",
@@ -222,5 +154,171 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AvainParkKlere.Api.Controllers.StudentClothingController",
+    "Method": "Get",
+    "RelativePath": "StudentClothing",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[AvianParkKlere.Contracts.Dtos.StudentClothing.StudentClothingGetDto, AvianParkKlere.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "AvainParkKlere.Api.Controllers.StudentClothingController",
+    "Method": "Create",
+    "RelativePath": "StudentClothing",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "studentClothingPostDto",
+        "Type": "AvianParkKlere.Contracts.Dtos.StudentClothing.StudentClothingPostDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AvainParkKlere.Api.Controllers.StudentClothingController",
+    "Method": "Delete",
+    "RelativePath": "StudentClothing",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "studentId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "clothingId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AvainParkKlere.Api.Controllers.StudentClothingController",
+    "Method": "GetById",
+    "RelativePath": "StudentClothing/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "AvianParkKlere.Contracts.Dtos.StudentClothing.StudentClothingGetDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "AvainParkKlere.Api.Controllers.StudentClothingController",
+    "Method": "GetByStudent",
+    "RelativePath": "StudentClothing/clothing-for-student/{studentId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "studentId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[AvianParkKlere.Contracts.Dtos.StudentClothing.StudentClothingGetDto, AvianParkKlere.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "AvainParkKlere.Api.Controllers.StudentClothingController",
+    "Method": "Exists",
+    "RelativePath": "StudentClothing/exists",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "studentId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "clothingId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Boolean",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "AvainParkKlere.Api.Controllers.StudentClothingController",
+    "Method": "GetByClothing",
+    "RelativePath": "StudentClothing/students-for-clothing/{clothingId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "clothingId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[AvianParkKlere.Contracts.Dtos.StudentClothing.StudentClothingGetDto, AvianParkKlere.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   }
 ]

@@ -1,0 +1,36 @@
+﻿@using AutoMapper
+@using AvianParkKlere.ServerUser.Components.CrudDialogs.Generic
+@using AvianParkKlere.ServerUser.Models
+@using AvianParkKlere.ServerUser.Services
+
+@inject IMapper _mapper
+@inject ApiService _api
+
+<CreateUpdateDialog OnSubmit="Assign">
+    <FormTemplate>
+        @if (SelectedClothes != null && SelectedClothes.Any())
+        {
+            <MudList T="StudentSelection">
+                @foreach (var selection in SelectedClothes)
+                {
+                    <MudListItem>
+                        <MudCheckBox @bind-Value="selection.Selected" Color="Color.Primary">
+                            @($"{selection.Clothing.Name}")
+                        </MudCheckBox>
+
+                        @if (selection.Selected)
+                        {
+                            <MudCollapse Expanded="true">
+                                <MudTextField Label="Size" @bind-Value="selection.Size" Placeholder="@($"Enter Size ({selection.Clothing.SizeMeasurement})")" />
+                            </MudCollapse>
+                        }
+                    </MudListItem>
+                }
+            </MudList>
+        }
+        else
+        {
+            <MudText>No students available to assign.</MudText>
+        }
+    </FormTemplate>
+</CreateUpdateDialog>

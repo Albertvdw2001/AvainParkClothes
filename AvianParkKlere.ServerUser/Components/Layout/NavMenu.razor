@@ -1,5 +1,6 @@
 ﻿
-<MudNavMenu>
-    <MudNavLink Href="students" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Add">Students</MudNavLink>
-    <MudNavLink Href="clothes" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.List">Clothes</MudNavLink>
+<MudNavMenu >
+    <MudNavLink OnClick="async () => await InvokeAsync(StateHasChanged)" Href="" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Add">Students</MudNavLink>
+    <MudNavLink Href="clothes" OnClick="async () => await InvokeAsync(StateHasChanged)" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.List">Clothes</MudNavLink>
 </MudNavMenu>
+

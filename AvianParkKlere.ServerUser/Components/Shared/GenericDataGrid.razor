@@ -130,13 +130,18 @@ else
         {
             <MudTd DataLabel="Empty">
             </MudTd>
-            <MudTd DataLabel="Edit">
+           @*  <MudTd DataLabel="Edit">
                 <MudIconButton Icon="@Icons.Material.Outlined.Edit" Size="Size.Medium" Color="Color.Warning" OnClick="() => OpenUpdateDialogAsync(context)"></MudIconButton>
-            </MudTd>
+            </MudTd> *@
             <MudTd DataLabel="Delete">
                 <MudIconButton Icon="@Icons.Material.Outlined.Delete" Size="Size.Medium" Color="Color.Error" OnClick="() => OpenDeleteDialogAsync(context)"></MudIconButton> @* OnClick="DeleteItemAsync(context)" *@
             </MudTd>
+            
         }
+            <MudTd DataLabel="Assign">
+                <MudIconButton Icon="@AssignIcon" Size="Size.Medium" Color="Color.Error" OnClick="() => AssignItem(context)"></MudIconButton>
+            </MudTd>
+
         <MudTd DataLabel="View">
             <MudIconButton Icon="@Icons.Material.Outlined.Visibility" Size="Size.Medium" Color="Color.Info" OnClick="() => OpenViewItemAsync(context)"></MudIconButton>   
         </MudTd>

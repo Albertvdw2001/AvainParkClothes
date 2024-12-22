@@ -1,6 +1,7 @@
 ﻿using AvianParkKlere.Contracts.Dtos.Clothing;
 using AvianParkKlere.Contracts.Dtos.Student;
 using AvianParkKlere.Contracts.Dtos.StudentClothing;
+using AvianParkKlere.ServerUser.Models;
 using Newtonsoft.Json;
 using System.Net.Http;
 
@@ -81,7 +82,7 @@ namespace AvianParkKlere.ServerUser.Services
 
         public async Task<List<StudentClothingGetDto>> GetClothingForStudent(int studentId)
         {
-            var response = await httpClient.GetAsync($"StudentClothing/Student/{studentId}");
+            var response = await httpClient.GetAsync($"StudentClothing/clothing-for-student/{studentId}");
             var content = await response.Content.ReadAsStringAsync();
             var result = JsonConvert.DeserializeObject<List<StudentClothingGetDto>>(content);
 
@@ -90,12 +91,97 @@ namespace AvianParkKlere.ServerUser.Services
 
         public async Task<List<StudentClothingGetDto>> GetStudentForClothing(int clothingId)
         {
-            var response = await httpClient.GetAsync($"StudentClothing/Clothing/{clothingId}");
+            var response = await httpClient.GetAsync($"StudentClothing/students-for-clothing/{clothingId}");
             var content = await response.Content.ReadAsStringAsync();
             var result = JsonConvert.DeserializeObject<List<StudentClothingGetDto>>(content);
 
             return result;
-        }   
+        }
+
+        public async Task<bool> AddOrDeleteAssignedStudents(int clothingId, StudentSelection studentSelection)
+        {
+            var existsResponse = await httpClient.GetAsync($"StudentClothing/exists?studentId={studentSelection.Student.Id}&clothingId={clothingId}");
+            if (existsResponse.IsSuccessStatusCode == false)
+            {
+                return false;
+            }
+            var content = await existsResponse.Content.ReadAsStringAsync();
+            var exists = JsonConvert.DeserializeObject<bool>(content);
+
+            if (exists)
+            {
+                if (studentSelection.Selected == false)
+                {
+                    // delete
+                    var deleteResponse = await httpClient.DeleteAsync($"StudentClothing?studentId={studentSelection.Student.Id}&clothingId={clothingId}");
+                    if (deleteResponse.IsSuccessStatusCode == false)
+                    {
+                        return false;
+                    }
+                    return true;
+                }
+                return true;
+            }
+            else
+            {
+                if (studentSelection.Selected)
+                {
+                    // add
+                    StudentClothingPostDto studentClothing = new StudentClothingPostDto
+                    {
+                        StudentId = studentSelection.Student.Id,
+                        ClothingId = clothingId,
+                        Size = studentSelection.Size == null || studentSelection.Size == "" ? "Not Specified" : studentSelection.Size
+                    };
+                    var postResponse = await httpClient.PostAsJsonAsync("StudentClothing", studentClothing);
+                    return postResponse.IsSuccessStatusCode;
+                }
+                return true;
+            }
+        }
+
+
+        public async Task<bool> AddOrDeleteAssignedClothes(int studentId, ClothesSelection clothesSelection)
+        {
+            var existsResponse = await httpClient.GetAsync($"StudentClothing/exists?studentId={studentId}&clothingId={clothesSelection.Clothing.Id}");
+            if (existsResponse.IsSuccessStatusCode == false)
+            {
+                return false;
+            }
+            var content = await existsResponse.Content.ReadAsStringAsync();
+            var exists = JsonConvert.DeserializeObject<bool>(content);
+
+            if (exists)
+            {
+                if (clothesSelection.Selected == false)
+                {
+                    // delete
+                    var deleteResponse = await httpClient.DeleteAsync($"StudentClothing?studentId={studentId}&clothingId={clothesSelection.Clothing.Id}");
+                    if (deleteResponse.IsSuccessStatusCode == false)
+                    {
+                        return false;
+                    }
+                    return true;
+                }
+                return true;
+            }
+            else
+            {
+                if (clothesSelection.Selected)
+                {
+                    // add
+                    StudentClothingPostDto studentClothing = new StudentClothingPostDto
+                    {
+                        StudentId = studentId,
+                        ClothingId = clothesSelection.Clothing.Id,
+                        Size = clothesSelection.Size == null || clothesSelection.Size == "" ? "Not Specified" : clothesSelection.Size
+                    };
+                    var postResponse = await httpClient.PostAsJsonAsync("StudentClothing", studentClothing);
+                    return postResponse.IsSuccessStatusCode;
+                }
+                return true;
+            }
+        }
 
     }
 }

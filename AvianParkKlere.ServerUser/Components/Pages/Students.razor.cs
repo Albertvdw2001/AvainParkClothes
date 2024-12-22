@@ -3,6 +3,7 @@ using AvianParkKlere.ServerUser.Components.CrudDialogs.Create;
 using AvianParkKlere.ServerUser.Components.CrudDialogs.Generic;
 using AvianParkKlere.ServerUser.Components.CrudDialogs.Read;
 using AvianParkKlere.ServerUser.Components.Shared;
+using AvianParkKlere.ServerUser.Models;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 
@@ -68,6 +69,48 @@ namespace AvianParkKlere.ServerUser.Components.Pages
             }
 
             ShowSuccessSnackbar("Student created successfully");
+            if (CruDialog is not null)
+            {
+                await GetStudentList();
+                CruDialog.Close();
+            }
+        }
+
+
+        private async Task OpenAssignClothesDialog(StudentGetDto student)
+        {
+            var studentClothingList = await _apiService.GetClothingForStudent(student.Id);
+            var allClothes = await _apiService.GetClothing();
+
+            var parameters = new DialogParameters<AssignClothesDialog>
+            {
+                { x => x.Student, student},
+                { x => x.StudentClothingList, studentClothingList},
+                { x => x.AllClothes, allClothes},
+                { x => x.OnAssign, EventCallback.Factory.Create<List<ClothesSelection>>(this, HandleAssignClothes)}
+            };
+
+            CruDialog = await _dialogService.ShowAsync<AssignClothesDialog>(
+                "Assign Clothes",
+                parameters,
+                new DialogOptions { CloseButton = true, BackdropClick = false, Position = DialogPosition.TopCenter }
+            );
+        }
+
+
+        private async Task HandleAssignClothes(List<ClothesSelection> clothesSelections)
+        {
+            foreach (var selection in clothesSelections)
+            {
+                var apiResponse = await _apiService.AddOrDeleteAssignedClothes(selection.StudentId, selection);
+                if (apiResponse == false)
+                {
+                    ShowErrorSnackbar("Student assignment failed. Please contact Albert or try again.");
+                    return;
+                }
+            }
+
+            ShowSuccessSnackbar("Students assigned successfully");
             if (CruDialog is not null)
             {
                 await GetStudentList();

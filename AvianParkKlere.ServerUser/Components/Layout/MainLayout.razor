@@ -1,5 +1,7 @@
 ﻿@inherits LayoutComponentBase
 
+@inject IJSRuntime _js
+
 <MudThemeProvider  />
 <MudPopoverProvider />
 <MudLayout>
@@ -26,21 +28,26 @@
     <a class="dismiss">🗙</a>
 </div>
 
+<script>
+    function reloadPage() {
+        location.reload();
+    }
+</script>
+
 @code {
     private bool _drawerOpen = true;
     private bool _isDarkMode = true;
     private MudTheme? _theme = null;
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        base.OnInitialized();
-
         _theme = new()
         {
             PaletteLight = _lightPalette,
             PaletteDark = _darkPalette,
             LayoutProperties = new LayoutProperties()
         };
+
     }
 
 

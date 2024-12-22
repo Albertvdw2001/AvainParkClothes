@@ -2,6 +2,7 @@
 using AvainParkKlere.Api.EntityFrameworkCore.Entities;
 using AvainParkKlere.Api.RepositoryInterfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations.Operations;
 
 namespace AvainParkKlere.Api.Repositories
 {
@@ -25,6 +26,23 @@ namespace AvainParkKlere.Api.Repositories
             var response = await _apDbContext.StudentClothes.Where(sc => sc.ClothingId == clothingId).ToListAsync();
             return response;
         }   
+
+        public async Task<bool> StudentClothingExists(int studentId, int clothingId)
+        {
+            var response = await _apDbContext.StudentClothes.FirstOrDefaultAsync(sc => sc.StudentId == studentId && sc.ClothingId == clothingId);
+            if (response is null)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public async Task DeleteStudentClothing(int studentId, int clothingId)
+        {
+            var studentClothing = await _apDbContext.StudentClothes.FirstOrDefaultAsync(sc => sc.StudentId == studentId && sc.ClothingId == clothingId);
+            _apDbContext.StudentClothes.Remove(studentClothing);
+            await _apDbContext.SaveChangesAsync();
+        }
 
     }
 }
