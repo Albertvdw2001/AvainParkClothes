@@ -1,0 +1,77 @@
+name: dockercompose9655230349882836540
+services:
+  avainparkklere.api:
+    build:
+      context: C:\Users\alber\Desktop\.Net projects\AvianParkKlere\AvainParkClothes
+      dockerfile: AvainParkKlere.Api/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_HTTP_PORTS: "8080"
+      ASPNETCORE_URLS: http://5000:8080
+    image: avainparkklereapi
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 8080
+        published: "5000"
+        protocol: tcp
+      - mode: ingress
+        target: 8081
+        published: "5001"
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: C:\Users\alber\AppData\Roaming/Microsoft/UserSecrets
+        target: /home/app/.microsoft/usersecrets
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Users\alber\AppData\Roaming/ASP.NET/Https
+        target: /home/app/.aspnet/https
+        read_only: true
+        bind:
+          create_host_path: true
+  avianparkklere.serveruser:
+    build:
+      context: C:\Users\alber\Desktop\.Net projects\AvianParkKlere\AvainParkClothes
+      dockerfile: AvianParkKlere.ServerUser/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_HTTP_PORTS: "8083"
+      ASPNETCORE_URLS: http://5010:8080
+    image: avianparkklereserveruser
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 8083
+        published: "5010"
+        protocol: tcp
+      - mode: ingress
+        target: 8084
+        published: "5011"
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: C:\Users\alber\AppData\Roaming/Microsoft/UserSecrets
+        target: /home/app/.microsoft/usersecrets
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Users\alber\AppData\Roaming/ASP.NET/Https
+        target: /home/app/.aspnet/https
+        read_only: true
+        bind:
+          create_host_path: true
+  sqlserver:
+    environment:
+      SA_PASSWORD: Odegaard.8
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    networks:
+      default: null
+networks:
+  default:
+    name: dockercompose9655230349882836540_default

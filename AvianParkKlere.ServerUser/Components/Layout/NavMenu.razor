@@ -1,6 +1,138 @@
-﻿
+﻿@using AvianParkKlere.Contracts.Dtos.StudentClothing
+@using AvianParkKlere.ServerUser.Constants
+@using AvianParkKlere.ServerUser.Models
+@using AvianParkKlere.ServerUser.Services
+@using QuestPDF.Fluent
+@using QuestPDF.Helpers
+@using QuestPDF.Infrastructure
+
+@inject ApiService _apiService 
+@inject ISnackbar _snackbar 
+@inject IJSRuntime _js
+
+
 <MudNavMenu >
     <MudNavLink OnClick="async () => await InvokeAsync(StateHasChanged)" Href="" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Add">Students</MudNavLink>
-    <MudNavLink Href="clothes" OnClick="async () => await InvokeAsync(StateHasChanged)" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.List">Clothes</MudNavLink>
+    <MudNavLink OnClick="async () => await InvokeAsync(StateHasChanged)" Href="clothes" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.List">Clothes</MudNavLink>
+    <MudNavLink OnClick="async () => await InvokeAsync(StateHasChanged)" Href="downloadall" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.List">Download all to PDF</MudNavLink>
 </MudNavMenu>
 
+
+@code {
+    private List<StudentClothingGetDto> StudentClothingList = new();
+
+    private List<StudentStudentClothingComposite> StudentList = new();
+
+    private List<ClothingStudentClothingComposite> ClothesList = new();
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetStudentClothing();
+    }   
+
+    private async Task GetStudentClothing()
+    {
+        StudentClothingList = await _apiService.GetStudentClothingAsync();
+
+        if (StudentClothingList == null)
+        {
+            _snackbar.Add("Error fetching data", Severity.Error);   
+            return;
+        }   
+    }
+
+
+    private async Task GetStudentList()
+    {
+        List<int> clothingIds = StudentClothingList.Select(x => x.ClothingId).Distinct().ToList();
+
+        foreach (int id in clothingIds)
+        {
+            StudentList = new();
+            var clothingStudents = await _apiService.GetStudentForClothing(id);
+
+            StudentList = new();
+            foreach (var item in clothingStudents)
+            {
+                var student = await _apiService.GetStudent(item.StudentId);
+                var clothing = await _apiService.GetClothing(item.ClothingId);
+
+                if (student == null || clothing == null)
+                {
+                    _snackbar.Add("Error fetching data", Severity.Error);
+                    return;
+                }
+
+                var composite = new StudentStudentClothingComposite
+                    {
+                        Name = student.Name,
+                        Surname = student.Surname,
+                        Age = (int)student.Age,
+                        Grade = (int)student.Grade,
+                        Size = item.Size,
+                        SizeMeasurement = clothing.SizeMeasurement
+                    };
+                StudentList.Add(composite);
+            }
+        }
+    }
+
+    private async Task DownloadStudentsPdf(string filename)
+    {
+        await GetStudentList();
+
+        QuestPDF.Settings.License = LicenseType.Community;
+
+        using var memoryStream = new MemoryStream();
+
+        Document.Create(container =>
+        {
+            container.Page(page =>
+            {
+                page.Size(PageSizes.A4);
+                page.Margin(1, Unit.Centimetre);
+                page.PageColor(QuestPDF.Helpers.Colors.White);
+                page.DefaultTextStyle(x => x.FontSize(12));
+
+                page.Content()
+                .PaddingVertical(0, Unit.Centimetre)
+                .Table(table =>
+                {
+                    // Define table columns
+                    table.ColumnsDefinition(columns =>
+                    {
+                        columns.RelativeColumn(); // Name
+                        columns.RelativeColumn(); // Surname
+                        columns.RelativeColumn(); // Grade
+                        columns.RelativeColumn(); // Age
+                        columns.RelativeColumn(); // Size
+                    });
+
+                    // Add table headers
+                    table.Cell().LabelCell("Name");
+                    table.Cell().LabelCell("Surname");
+                    table.Cell().LabelCell("Grade");
+                    table.Cell().LabelCell("Age");
+                    table.Cell().LabelCell("Size");
+
+                    // Add data rows
+                    foreach (var item in StudentList)
+                    {
+                        table.Cell().ValueCell(item.Name);
+                        table.Cell().ValueCell(item.Surname);
+                        table.Cell().ValueCell($"Gr. {item.Grade}");
+                        table.Cell().ValueCell(item.Age.ToString());
+                        table.Cell().ValueCell($"{item.Size} ({item.SizeMeasurement})");
+                    }
+                });
+            });
+        }).GeneratePdf(memoryStream);
+
+        memoryStream.Seek(0, SeekOrigin.Begin);
+        using var streamRef = new DotNetStreamReference(memoryStream);
+        await _js.InvokeVoidAsync("exportPDF", filename + ".pdf", streamRef);
+    }
+
+
+}

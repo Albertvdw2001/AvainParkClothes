@@ -68,6 +68,12 @@ namespace AvianParkKlere.ServerUser.Services
             return result;
         }
 
+        public async Task<bool> DeleteClothing(int id)
+        {
+            var response = await httpClient.DeleteAsync($"Clothing/{id}");
+            return response.IsSuccessStatusCode;
+        }   
+
 
         /* StudentClothing */
 

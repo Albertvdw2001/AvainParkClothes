@@ -17,6 +17,7 @@
 <GenericDataGrid @ref="Table"
                 Items="StudentList"
                 HeaderTitles="@(["Id", "Name", "Surname", "Age", "Grade"])"
+                 SearchFields="@(["Id", "Name", "Surname", "Age", "Grade"])"
                 TGet="StudentGetDto"
                 TCreate="StudentPostDto"
                 TUpdate="StudentPutDto"
@@ -25,7 +26,9 @@
                 OnViewItem="OpenViewDialog"
                 OnAssign="OpenAssignClothesDialog"
                 AssignIcon="@Icons.Material.Filled.DryCleaning"
-                EnableCrudOptions="true" >
+                EnableCrudOptions="true"
+                OnDeleteSelectedItems="OpenDeleteSelectedDialog"
+                >
     <RowTemplate>
         <MudTd DataLabel="Id">@context.Id</MudTd>
         <MudTd DataLabel="Name">@context.Name</MudTd>

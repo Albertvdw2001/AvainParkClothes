@@ -16,11 +16,13 @@ namespace AvianParkKlere.Contracts.AutoMapper
             CreateMap<Student, StudentGetDto>().ReverseMap();
             CreateMap<Student, StudentPostDto>().ReverseMap();
             CreateMap<Student, StudentPutDto>().ReverseMap();
+            CreateMap<StudentGetDto, StudentGetDto>().ReverseMap();
 
             /* Clothing */
             CreateMap<Clothing, ClothingGetDto>().ReverseMap();
             CreateMap<Clothing, ClothingPostDto>().ReverseMap();    
             CreateMap<Clothing, ClothingPutDto>().ReverseMap(); 
+            CreateMap<ClothingGetDto, ClothingGetDto>().ReverseMap(); 
             
             /* StudentClothing */
             CreateMap<StudentClothing, StudentClothingGetDto>().ReverseMap();   

@@ -23,7 +23,7 @@ public partial class GenericDataGrid<TGet, TCreate, TUpdate>
     [Parameter] public EventCallback<IEnumerable<TGet>> OnDeleteItems { get; set; }
     [Parameter] public EventCallback<IEnumerable<TGet>> OnDeleteSelectedItems { get; set; }
     [Parameter] public EventCallback<TGet> OnAssign { get; set; }
-    [Parameter] public string AssignIcon { get; set; }   
+    [Parameter] public string AssignIcon { get; set; }
     [Parameter] public EventCallback OnExportAllToCSV { get; set; }
     [Parameter] public EventCallback OnExportAllToPDF { get; set; }
     [Parameter] public EventCallback<IEnumerable<TGet>> OnExportSelectedToCSV { get; set; }
@@ -40,11 +40,14 @@ public partial class GenericDataGrid<TGet, TCreate, TUpdate>
 
     public HashSet<TGet> SelectedItems = new();
     public MudTable<TGet> Table { get; set; }
+    private List<TGet> ItemsCopy = new();
+    private bool FilterApplied = false;
 
-
+    [Parameter] public bool Initialized { get; set; } = false;
 
     protected override async Task OnInitializedAsync()
     {
+
         SearchField = SearchFields.Count > 1 ? SearchFields[0] : "";
         if (OnSearchFieldChange.HasDelegate)
         {
@@ -52,29 +55,49 @@ public partial class GenericDataGrid<TGet, TCreate, TUpdate>
         }
     }
 
+    protected override async Task OnParametersSetAsync()
+    {
+        if (FilterApplied == false)
+        {
+            ItemsCopy = _mapper.Map<List<TGet>>(Items);
+        }
+    } 
+
 
     private void OnSearch(string searchQuery)
     {
-
         if (OnSearchQueryChanged.HasDelegate)
         {
             OnSearchQueryChanged.InvokeAsync(searchQuery);
         }
 
-        /*
-        foreach (var field in SearchFields)
+        if (searchQuery == "")
         {
-            if (Regex.Replace(field, @"\s+", "").ToLower() == SearchField.ToLower())
+            FilterApplied = false;
+            Items = ItemsCopy;
+        }
+        else
+        {
+            FilterApplied = true;
+            foreach (var field in SearchFields)
             {
-                Items = Items.Where(x => x.GetType().GetProperty(field)?.GetValue(x)?.ToString().Contains(searchQuery, StringComparison.OrdinalIgnoreCase) == true);
-            } 
-            StateHasChanged();
-        }*/
+                if (Regex.Replace(field, @"\s+", "").ToLower() == SearchField.ToLower())
+                {
+                    Items = Items.Where(x => x.GetType().GetProperty(field)?.GetValue(x)?.ToString().Contains(searchQuery, StringComparison.OrdinalIgnoreCase) == true);
+                }
+
+                StateHasChanged();
+            }
+        }
+
+        StateHasChanged();
     }
 
 
     private void OnSearchFieldSelect(string field)
     {
+        SearchField = field;
+        StateHasChanged();
         if (OnSearchFieldChange.HasDelegate)
         {
             OnSearchFieldChange.InvokeAsync(field);
@@ -135,12 +158,12 @@ public partial class GenericDataGrid<TGet, TCreate, TUpdate>
         }
     }
 
-
+    
     private async Task DeleteSelectedItemsAsync()
     {
-        if (OnDeleteItems.HasDelegate && Items != null)
+        if (OnDeleteSelectedItems.HasDelegate && SelectedItems.Count > 0)
         {
-            await OnDeleteSelectedItems.InvokeAsync(Items);
+            await OnDeleteSelectedItems.InvokeAsync(SelectedItems);
         }
     }
 

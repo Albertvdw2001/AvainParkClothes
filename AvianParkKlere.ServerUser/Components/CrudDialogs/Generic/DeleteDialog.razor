@@ -7,7 +7,7 @@
         <MudText Typo="Typo.body2">
             @BodyText
         </MudText>
-        @if (AddTextConfirmation == true)
+        @if (AddTextConfirmation)
         {
             <MudTextField T="string" @bind-Text="DeleteConfirmationText" Immediate="true" Placeholder="@("Enter \"DELETE\" To Confirm")" />
         }

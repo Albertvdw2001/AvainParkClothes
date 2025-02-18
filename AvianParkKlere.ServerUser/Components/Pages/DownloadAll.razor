@@ -1,0 +1,21 @@
+﻿@page "/downloadall"
+@using AvianParkKlere.ServerUser.Services
+
+@inject ApiService _apiService
+@inject IJSRuntime _js
+
+<MudButton OnClick="async () => await DownloadGroupByGrade(Combined)">
+    Organised by Grade
+</MudButton>
+
+<MudButton OnClick="async () => await DownloadGroupByGradeAndClothing(Combined)">
+    Organised by Clothing
+</MudButton>
+
+<MudButton OnClick="async () => await DownloadGroupByStudent(Combined)">
+    Organised by Child
+</MudButton>
+
+<MudButton OnClick="async () => await DownloadGroupByGradeClothingAndSize(Combined)">
+    Counts of each Clothing Item
+</MudButton>

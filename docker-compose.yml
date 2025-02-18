@@ -1,0 +1,17 @@
+services:
+  avianparkklere.serveruser:
+    image: ${DOCKER_REGISTRY-}avianparkklereserveruser
+    build:
+      context: .
+      dockerfile: AvianParkKlere.ServerUser/Dockerfile
+
+  avainparkklere.api:
+    image: ${DOCKER_REGISTRY-}avainparkklereapi
+    build:
+      context: .
+      dockerfile: AvainParkKlere.Api/Dockerfile
+  
+  sqlserver:
+    image: "mcr.microsoft.com/mssql/server:2019-latest"
+    environment:
+      SA_PASSWORD: "Odegaard.8"    

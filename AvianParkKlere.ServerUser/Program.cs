@@ -14,7 +14,7 @@ builder.Services.AddRazorComponents()
 
 builder.Services.AddHttpClient("Default", client =>
 {
-    client.BaseAddress = new Uri("https://localhost:7067/");
+    client.BaseAddress = new Uri("http://localhost:5000/");
 });
 
 // Added Services

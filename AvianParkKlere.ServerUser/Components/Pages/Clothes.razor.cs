@@ -7,6 +7,7 @@ using AvianParkKlere.ServerUser.Components.CrudDialogs.Read;
 using AvianParkKlere.ServerUser.Components.Shared;
 using AvianParkKlere.ServerUser.Models;
 using Microsoft.AspNetCore.Components;
+using Microsoft.VisualBasic;
 using MudBlazor;
 
 namespace AvianParkKlere.ServerUser.Components.Pages
@@ -86,6 +87,11 @@ namespace AvianParkKlere.ServerUser.Components.Pages
         }
 
 
+
+
+
+
+
         private async Task HandleAssignStudents(List<StudentSelection> studentSelections)
         {
             foreach (var selection in studentSelections)
@@ -126,7 +132,7 @@ namespace AvianParkKlere.ServerUser.Components.Pages
         }
 
 
-        private async Task OpenDeleteDialog(StudentGetDto student)
+        private async Task OpenDeleteDialog(ClothingGetDto clothing)
         {
             var parameters = new DialogParameters<DeleteDialog>
             {
@@ -142,14 +148,36 @@ namespace AvianParkKlere.ServerUser.Components.Pages
             var result = await CruDialog.Result;
             if (!result.Canceled)
             {
-                await HandleDeleteStudent(student.Id);
+                await HandleDeleteClothing(clothing.Id);
             }
         }
 
 
-        private async Task HandleDeleteStudent(int id)
+        private async Task OpenDeleteSelectedDialog(IEnumerable<ClothingGetDto> clothes)
         {
-            var apiResposnse = await _apiService.DeleteStudent(id);
+            var parameters = new DialogParameters<DeleteDialog>
+            {
+                { x => x.BodyText, "Are you sure you want to remove the selected students from the database?"}
+            };
+
+            CruDialog = await _dialogService.ShowAsync<DeleteDialog>(
+                "Delete Students",
+                parameters,
+                new DialogOptions { CloseButton = true, BackdropClick = false, Position = DialogPosition.TopCenter }
+            );
+
+            var result = await CruDialog.Result;
+            if (!result.Canceled)
+            {
+                List<int> ids = clothes.Select(x => x.Id).ToList();
+                await HandleDeleteClothes(ids);
+            }
+        }
+
+
+        private async Task HandleDeleteClothing(int id)
+        {
+            var apiResposnse = await _apiService.DeleteClothing(id);
 
             if (apiResposnse == false)
             {
@@ -157,6 +185,24 @@ namespace AvianParkKlere.ServerUser.Components.Pages
                 return;
             }
             ShowSuccessSnackbar("Student deleted successfully");
+            await GetClothesList();
+            StateHasChanged();
+        }
+
+        private async Task HandleDeleteClothes(List<int> ids)
+        {
+            foreach (int id in ids)
+            {
+                var apiResposnse = await _apiService.DeleteClothing(id);
+
+                if (apiResposnse == false)
+                {
+                    ShowErrorSnackbar("Failed to delete clothes");
+                    await GetClothesList();
+                    return;
+                }
+            }
+            ShowSuccessSnackbar("Clothes deleted successfully");
             await GetClothesList();
             StateHasChanged();
         }

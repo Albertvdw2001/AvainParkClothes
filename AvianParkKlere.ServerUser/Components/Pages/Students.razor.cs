@@ -24,6 +24,7 @@ namespace AvianParkKlere.ServerUser.Components.Pages
         protected override async Task OnInitializedAsync()
         {
             await GetStudentList();
+            StateHasChanged();
         }
 
 
@@ -154,6 +155,24 @@ namespace AvianParkKlere.ServerUser.Components.Pages
             StateHasChanged();
         }
 
+        private async Task HandleDeleteStudents(List<int> ids)
+        {
+            foreach (int id in ids)
+            {
+                var apiResposnse = await _apiService.DeleteStudent(id);
+
+                if (apiResposnse == false)
+                {
+                    ShowErrorSnackbar("Failed to delete students");
+                    await GetStudentList();
+                    return;
+                }
+            }
+            ShowSuccessSnackbar("Students deleted successfully");
+            await GetStudentList();
+            StateHasChanged();
+        }
+
 
         private async Task OpenViewDialog(StudentGetDto student)
         {
@@ -170,6 +189,27 @@ namespace AvianParkKlere.ServerUser.Components.Pages
 
         }
 
+
+        private async Task OpenDeleteSelectedDialog(IEnumerable<StudentGetDto> students)
+        {
+            var parameters = new DialogParameters<DeleteDialog>
+            {
+                { x => x.BodyText, "Are you sure you want to remove selected students from the database?"}
+            };
+
+            CruDialog = await _dialogService.ShowAsync<DeleteDialog>(
+                "Delete Students",
+                parameters,
+                new DialogOptions { CloseButton = true, BackdropClick = false, Position = DialogPosition.TopCenter }
+            );
+
+            var result = await CruDialog.Result;
+            if (!result.Canceled)
+            {
+                List<int> studentIds = students.Select(x => x.Id).ToList();
+                await HandleDeleteStudents(studentIds); 
+            }
+        }
 
         private void ValidateForm()
         {

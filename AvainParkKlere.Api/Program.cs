@@ -1,4 +1,3 @@
-
 using AvainParkKlere.Api.EntityFrameworkCore;
 using AvainParkKlere.Api.Repositories;
 using AvainParkKlere.Api.RepositoryInterfaces;
@@ -16,7 +15,8 @@ namespace AvainParkKlere.Api
             // Setup connection to the database
             var connectionString = builder.Configuration.GetConnectionString("AvianParkConnectionString");
 
-            builder.Services.AddDbContext<AvianParkDbContext>(options => {
+            builder.Services.AddDbContext<AvianParkDbContext>(options =>
+            {
                 options.UseSqlServer(connectionString);
             });
 
@@ -35,18 +35,24 @@ namespace AvainParkKlere.Api
             builder.Services.AddScoped<IStudentClothingRepository, StudentClothingRepository>();
             builder.Services.AddScoped<IClothingRepository, ClothingRepository>();
 
-
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
+            // Run migrations automatically
+            using (var scope = app.Services.CreateScope())
             {
-                app.UseSwagger();
-                app.UseSwaggerUI();
+                var dbContext = scope.ServiceProvider.GetRequiredService<AvianParkDbContext>();
+                dbContext.Database.Migrate();
             }
 
-            app.UseHttpsRedirection();
 
+            // Configure the HTTP request pipeline.
+
+            app.UseSwagger();
+            app.UseSwaggerUI();
+
+
+            /*            app.UseHttpsRedirection();
+            */
             app.UseAuthorization();
 
 

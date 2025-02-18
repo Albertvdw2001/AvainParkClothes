@@ -17,11 +17,14 @@
                  TGet="ClothingGetDto"
                  TCreate="ClothingPostDto"
                  TUpdate="ClothingPutDto"
+                 OnDeleteItem="OpenDeleteDialog"
                  EnableCrudOptions="true" 
                  OnViewItem="OpenViewDialog"
-                 OnCreateNewItem="OpenCreateDialog"
+                 OnCreateNewItem="OpenCreateDialog" 
                     OnAssign="OpenAssignDialog"
-                    AssignIcon="@Icons.Material.Filled.Person">
+                    AssignIcon="@Icons.Material.Filled.Person"
+                OnDeleteSelectedItems="OpenDeleteSelectedDialog"
+>
     <RowTemplate>
         <MudTd DataLabel="Id">@context.Id</MudTd>
         <MudTd DataLabel="Name">@context.Name</MudTd>

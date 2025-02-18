@@ -2,6 +2,7 @@
 @inject MudBlazor.ISnackbar Snackbar
 @inject NavigationManager NavigationManager
 @inject ApiService _apiService  
+@inject IJSRuntime _js
 
 <MudDialog>
     <TitleContent>@Student.Name @Student.Surname (Gr. @Student.Grade)</TitleContent>
@@ -22,7 +23,7 @@
     </DialogContent>
 
     <DialogActions>
-        <MudButton Color="Color.Primary" OnClick="DownloadPdf">
+        <MudButton Color="Color.Primary" OnClick="@(async () => await DownloadPdf(ClothesList, $"{Student.Name}_{Student.Surname}Clothes"))">
             Download as PDF
         </MudButton>
     </DialogActions>

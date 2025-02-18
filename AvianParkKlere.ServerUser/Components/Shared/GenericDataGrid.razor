@@ -29,32 +29,14 @@
             OnClick="() => OpenCreateDialogAsync()"
             Color="Color.Primary">New</MudButton>
         }
-  
-        @if (OnDeleteItems.HasDelegate)
+
+        @if (OnDeleteSelectedItems.HasDelegate)
         {
-            <MudMenu Color="Color.Secondary"
-            Style="margin-left: 25px;"
-            EndIcon="@Icons.Material.Filled.KeyboardArrowDown"
-            Label="Delete"
-            Variant="Variant.Filled"
-            AnchorOrigin="Origin.BottomCenter"
-            TransformOrigin="Origin.TopCenter" Dense="true">
-
-            <MudMenuItem OnClick="DeleteAllItemsAsync">
-                <MudText Style="font-size: 14px;">
-                    Delete All
-                </MudText>
-            </MudMenuItem>
-
-            @if (SelectedItems.Count > 0 && OnDeleteSelectedItems.HasDelegate)
-            {
-                <MudMenuItem OnClick="DeleteSelectedItemsAsync">
-                    <MudText Style="font-size: 14px;">
-                        "Delete Selected"
-                    </MudText>
-                </MudMenuItem>
-            }
-            </MudMenu>
+            <MudButton Variant="Variant.Filled"
+                       DropShadow="true"
+                       StartIcon="@Icons.Material.Filled.Delete"
+                       OnClick="() => DeleteSelectedItemsAsync()"
+                       Color="Color.Error">Delete Selected</MudButton>
         }
         
 
