@@ -3,7 +3,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8083
-      - ASPNETCORE_URLS=http://5010:8080
+      - ASPNETCORE_URLS=http://localhost:5010:8080
     ports:
       - "5010:8083"
       - "5011:8084"
@@ -14,7 +14,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
-      - ASPNETCORE_URLS=http://5000:8080
+      - ASPNETCORE_URLS=http://localhost:5000:8080
     ports:
       - "5000:8080"
       - "5001:8081"

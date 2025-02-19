@@ -4,14 +4,20 @@ services:
     build:
       context: .
       dockerfile: AvianParkKlere.ServerUser/Dockerfile
+    depends_on:
+      - sqlserver
 
   avainparkklere.api:
     image: ${DOCKER_REGISTRY-}avainparkklereapi
     build:
       context: .
       dockerfile: AvainParkKlere.Api/Dockerfile
+    depends_on:
+      - sqlserver
   
   sqlserver:
     image: "mcr.microsoft.com/mssql/server:2019-latest"
     environment:
       SA_PASSWORD: "Odegaard.8"    
+    ports:
+      - "1433:1433" 

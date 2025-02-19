@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AvainParkKlere.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fa19d1ca39fbb222b5311d334375fc772d47c94f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5c413d62ca71485e88f1f40f4c5aca138c4160c5")]
 [assembly: System.Reflection.AssemblyProductAttribute("AvainParkKlere.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AvainParkKlere.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
