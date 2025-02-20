@@ -1,13 +1,13 @@
 {
   "Version": 1,
-  "Hash": "4NA9PygWGpoGuV8M4MLKHWGrrXg3e0MLfLn4jloq968=",
+  "Hash": "fT/UGHKkvTPAs4NP3RFnYy7pgya2VHtHm43xkJbxKik=",
   "Source": "AvainParkKlere.Api",
   "BasePath": "_content/AvainParkKlere.Api",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [
     {
-      "Identity": "C:\\Users\\alber\\Desktop\\.Net projects\\AvianParkKlere\\AvainParkClothes\\AvianParkKlere.Contracts\\AvianParkKlere.Contracts.csproj",
+      "Identity": "C:\\Users\\DELL\\OneDrive\\Desktop\\apk\\AvainParkClothes\\AvianParkKlere.Contracts\\AvianParkKlere.Contracts.csproj",
       "Version": 2,
       "Source": "AvianParkKlere.Contracts",
       "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",

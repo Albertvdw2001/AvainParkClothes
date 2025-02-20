@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AvianParkKlere.Contracts")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fa19d1ca39fbb222b5311d334375fc772d47c94f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f3197b3476b0a71581947aa9296596b44d966e88")]
 [assembly: System.Reflection.AssemblyProductAttribute("AvianParkKlere.Contracts")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AvianParkKlere.Contracts")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

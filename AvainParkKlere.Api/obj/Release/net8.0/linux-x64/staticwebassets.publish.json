@@ -1,0 +1,23 @@
+{
+  "Version": 1,
+  "Hash": "RQ1pY0DyMBfqZVjL75P3d9QH25l67SF/TtMGG+xXPOY=",
+  "Source": "AvainParkKlere.Api",
+  "BasePath": "_content/AvainParkKlere.Api",
+  "Mode": "Default",
+  "ManifestType": "Publish",
+  "ReferencedProjectsConfiguration": [
+    {
+      "Identity": "C:\\Users\\DELL\\OneDrive\\Desktop\\apk\\AvainParkClothes\\AvianParkKlere.Contracts\\AvianParkKlere.Contracts.csproj",
+      "Version": 2,
+      "Source": "AvianParkKlere.Contracts",
+      "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework"
+    }
+  ],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

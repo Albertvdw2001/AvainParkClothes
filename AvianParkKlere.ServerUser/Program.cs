@@ -14,7 +14,7 @@ builder.Services.AddRazorComponents()
 
 builder.Services.AddHttpClient("Default", client =>
 {
-    client.BaseAddress = new Uri("http://localhost:5000/");
+    client.BaseAddress = new Uri("http://host.docker.internal:5000/");
 });
 
 // Added Services

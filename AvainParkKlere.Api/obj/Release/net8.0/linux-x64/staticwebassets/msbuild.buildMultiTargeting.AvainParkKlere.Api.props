@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\AvainParkKlere.Api.props" />
+</Project>

@@ -18,6 +18,7 @@ services:
   sqlserver:
     image: "mcr.microsoft.com/mssql/server:2019-latest"
     environment:
-      SA_PASSWORD: "Odegaard.8"    
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Odegaard.8S    
     ports:
       - "1433:1433" 

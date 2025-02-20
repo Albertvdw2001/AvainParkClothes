@@ -21,6 +21,8 @@
 **/obj
 **/secrets.dev.yaml
 **/values.dev.yaml
+/AvianParkKlere.Contracts/appsettings.json
+/AvianParkKlere.Contracts/appsettings.Development.json
 LICENSE
 README.md
 !**/.gitignore
