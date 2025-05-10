@@ -1,44 +1,11 @@
-services:
-  avainparkklere.api:
-    image: avainparkklereapi:dev
-    container_name: "AvainParkKlere.Api"
-    build:
-      args:
-        LAUNCHING_FROM_VS: true
-        BUILD_CONFIGURATION: Debug
-      target: base
-      labels:
-        com.microsoft.created-by: "visual-studio"
-        com.microsoft.visual-studio.project-name: "AvainParkKlere.Api"
-    environment:
-      - DOTNET_USE_POLLING_FILE_WATCHER=1
-      - ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS=true
-      - NUGET_FALLBACK_PACKAGES=
-    volumes:
-      - C:\Users\alber\Desktop\.Net projects\AvianParkKlere\AvainParkClothes\AvainParkKlere.Api:/app:rw
-      - C:\Users\alber\Desktop\.Net projects\AvianParkKlere\AvainParkClothes:/src:rw
-      - C:\Users\alber\vsdbg\vs2017u5:/remote_debugger:rw
-      - C:\Users\alber\.nuget\packages:/.nuget/packages:ro
-      - C:\Users\alber\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
-      - C:\Users\alber\AppData\Roaming\ASP.NET\Https:/home/app/.aspnet/https:ro
-      - C:\Users\alber\AppData\Roaming\Microsoft\UserSecrets:/root/.microsoft/usersecrets:ro
-      - C:\Users\alber\AppData\Roaming\Microsoft\UserSecrets:/home/app/.microsoft/usersecrets:ro
-      - C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Sdks\Microsoft.Docker.Sdk\tools\linux-x64\net8.0:/VSTools:ro
-      - C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\HotReload:/HotReloadAgent:ro
+version: '3.4'
 
-    entrypoint: "dotnet --roll-forward Major /VSTools/DistrolessHelper/DistrolessHelper.dll --wait"
-    labels:
-      com.microsoft.visualstudio.debuggee.program: "dotnet"
-      com.microsoft.visualstudio.debuggee.arguments: " --additionalProbingPath /.nuget/packages  \"/app/bin/Debug/net8.0/AvainParkKlere.Api.dll\""
-      com.microsoft.visualstudio.debuggee.workingdirectory: "/app"
-      com.microsoft.visualstudio.debuggee.killprogram: "dotnet --roll-forward Major /VSTools/DistrolessHelper/DistrolessHelper.dll --stop dotnet"
-    tty: true
+services:
   avianparkklere.serveruser:
     image: avianparkklereserveruser:dev
     container_name: "AvianParkKlere.ServerUser_1"
     build:
       args:
-        LAUNCHING_FROM_VS: true
         BUILD_CONFIGURATION: Debug
       target: base
       labels:
@@ -47,23 +14,24 @@ services:
     environment:
       - DOTNET_USE_POLLING_FILE_WATCHER=1
       - ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS=true
-      - NUGET_FALLBACK_PACKAGES=
+      - NUGET_FALLBACK_PACKAGES=/.nuget/fallbackpackages
     volumes:
-      - C:\Users\alber\Desktop\.Net projects\AvianParkKlere\AvainParkClothes\AvianParkKlere.ServerUser:/app:rw
-      - C:\Users\alber\Desktop\.Net projects\AvianParkKlere\AvainParkClothes:/src:rw
-      - C:\Users\alber\vsdbg\vs2017u5:/remote_debugger:rw
-      - C:\Users\alber\.nuget\packages:/.nuget/packages:ro
-      - C:\Users\alber\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
-      - C:\Users\alber\AppData\Roaming\ASP.NET\Https:/home/app/.aspnet/https:ro
-      - C:\Users\alber\AppData\Roaming\Microsoft\UserSecrets:/root/.microsoft/usersecrets:ro
-      - C:\Users\alber\AppData\Roaming\Microsoft\UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - C:\Users\DELL\OneDrive\Desktop\apk\AvainParkClothes\AvianParkKlere.ServerUser:/app:rw
+      - C:\Users\DELL\OneDrive\Desktop\apk\AvainParkClothes:/src:rw
+      - C:\Users\DELL\vsdbg\vs2017u5:/remote_debugger:rw
+      - C:\Users\DELL\.nuget\packages:/.nuget/packages:ro
+      - C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages:/.nuget/fallbackpackages:ro
+      - C:\Users\DELL\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
+      - C:\Users\DELL\AppData\Roaming\ASP.NET\Https:/home/app/.aspnet/https:ro
+      - C:\Users\DELL\AppData\Roaming\Microsoft\UserSecrets:/root/.microsoft/usersecrets:ro
+      - C:\Users\DELL\AppData\Roaming\Microsoft\UserSecrets:/home/app/.microsoft/usersecrets:ro
       - C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Sdks\Microsoft.Docker.Sdk\tools\linux-x64\net8.0:/VSTools:ro
       - C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\HotReload:/HotReloadAgent:ro
 
     entrypoint: "dotnet --roll-forward Major /VSTools/DistrolessHelper/DistrolessHelper.dll --wait"
     labels:
       com.microsoft.visualstudio.debuggee.program: "dotnet"
-      com.microsoft.visualstudio.debuggee.arguments: " --additionalProbingPath /.nuget/packages  \"/app/bin/Debug/net8.0/AvianParkKlere.ServerUser.dll\""
+      com.microsoft.visualstudio.debuggee.arguments: " --additionalProbingPath /.nuget/packages --additionalProbingPath /.nuget/fallbackpackages  \"/app/bin/Debug/net8.0/AvianParkKlere.ServerUser.dll\""
       com.microsoft.visualstudio.debuggee.workingdirectory: "/app"
       com.microsoft.visualstudio.debuggee.killprogram: "dotnet --roll-forward Major /VSTools/DistrolessHelper/DistrolessHelper.dll --stop dotnet"
     tty: true

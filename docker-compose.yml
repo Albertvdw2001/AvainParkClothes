@@ -1,24 +1,15 @@
+version: '3.4'
+
 services:
   avianparkklere.serveruser:
     image: ${DOCKER_REGISTRY-}avianparkklereserveruser
     build:
       context: .
       dockerfile: AvianParkKlere.ServerUser/Dockerfile
-    depends_on:
-      - sqlserver
 
   avainparkklere.api:
     image: ${DOCKER_REGISTRY-}avainparkklereapi
     build:
       context: .
       dockerfile: AvainParkKlere.Api/Dockerfile
-    depends_on:
-      - sqlserver
-  
-  sqlserver:
-    image: "mcr.microsoft.com/mssql/server:2019-latest"
-    environment:
-      - ACCEPT_EULA=Y
-      - SA_PASSWORD=Odegaard.8S    
-    ports:
-      - "1433:1433" 
+

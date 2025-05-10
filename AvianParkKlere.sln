@@ -12,7 +12,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AvianParkKlere.Contracts", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AvianParkKlere.ServerUser", "AvianParkKlere.ServerUser\AvianParkKlere.ServerUser.csproj", "{D015FBC6-5972-49C0-A28A-DE6379883E0C}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{36EBBF2E-80E5-465F-B856-9BC9952A2E4E}"
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{E03969DD-C3B2-4EF7-94C3-0741D3EEE446}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -46,14 +46,14 @@ Global
 		{D015FBC6-5972-49C0-A28A-DE6379883E0C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D015FBC6-5972-49C0-A28A-DE6379883E0C}.Release|x64.ActiveCfg = Release|Any CPU
 		{D015FBC6-5972-49C0-A28A-DE6379883E0C}.Release|x64.Build.0 = Release|Any CPU
-		{36EBBF2E-80E5-465F-B856-9BC9952A2E4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{36EBBF2E-80E5-465F-B856-9BC9952A2E4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{36EBBF2E-80E5-465F-B856-9BC9952A2E4E}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{36EBBF2E-80E5-465F-B856-9BC9952A2E4E}.Debug|x64.Build.0 = Debug|Any CPU
-		{36EBBF2E-80E5-465F-B856-9BC9952A2E4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{36EBBF2E-80E5-465F-B856-9BC9952A2E4E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{36EBBF2E-80E5-465F-B856-9BC9952A2E4E}.Release|x64.ActiveCfg = Release|Any CPU
-		{36EBBF2E-80E5-465F-B856-9BC9952A2E4E}.Release|x64.Build.0 = Release|Any CPU
+		{E03969DD-C3B2-4EF7-94C3-0741D3EEE446}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E03969DD-C3B2-4EF7-94C3-0741D3EEE446}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E03969DD-C3B2-4EF7-94C3-0741D3EEE446}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E03969DD-C3B2-4EF7-94C3-0741D3EEE446}.Debug|x64.Build.0 = Debug|Any CPU
+		{E03969DD-C3B2-4EF7-94C3-0741D3EEE446}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E03969DD-C3B2-4EF7-94C3-0741D3EEE446}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E03969DD-C3B2-4EF7-94C3-0741D3EEE446}.Release|x64.ActiveCfg = Release|Any CPU
+		{E03969DD-C3B2-4EF7-94C3-0741D3EEE446}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

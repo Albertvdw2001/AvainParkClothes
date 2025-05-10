@@ -4,7 +4,7 @@
     <ProjectVersion>2.1</ProjectVersion>
     <DockerTargetOS>Linux</DockerTargetOS>
     <DockerPublishLocally>False</DockerPublishLocally>
-    <ProjectGuid>36ebbf2e-80e5-465f-b856-9bc9952a2e4e</ProjectGuid>
+    <ProjectGuid>e03969dd-c3b2-4ef7-94c3-0741d3eee446</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}</DockerServiceUrl>
     <DockerServiceName>avianparkklere.serveruser</DockerServiceName>
